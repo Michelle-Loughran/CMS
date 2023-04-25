@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.Web", "CMS.Web\CMS.Web.csproj", "{BA3B3C1A-5BA8-423E-A776-013AE26EE486}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.Data", "CMS.Data\CMS.Data.csproj", "{7CE6ED09-2530-4A55-8BF3-E5AE608B225D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.Test", "CMS.Test\CMS.Test.csproj", "{5ED40F64-1BD7-485D-9967-2E94EFE74CA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA3B3C1A-5BA8-423E-A776-013AE26EE486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA3B3C1A-5BA8-423E-A776-013AE26EE486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA3B3C1A-5BA8-423E-A776-013AE26EE486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA3B3C1A-5BA8-423E-A776-013AE26EE486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CE6ED09-2530-4A55-8BF3-E5AE608B225D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CE6ED09-2530-4A55-8BF3-E5AE608B225D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CE6ED09-2530-4A55-8BF3-E5AE608B225D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CE6ED09-2530-4A55-8BF3-E5AE608B225D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ED40F64-1BD7-485D-9967-2E94EFE74CA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ED40F64-1BD7-485D-9967-2E94EFE74CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ED40F64-1BD7-485D-9967-2E94EFE74CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED40F64-1BD7-485D-9967-2E94EFE74CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

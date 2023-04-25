@@ -1,0 +1,36 @@
+@model Patient
+
+
+<div class="card rounded shadow p-4">
+    <!-- Display student details -->
+    <div class="row">
+        <!-- Details and Navigation -->
+        <div class="col-8 d-flex flex-column justify-content-between">
+            <!-- Patient details -->
+            <div>
+                <h2 class="mb-4 text-primary">Student Details</h2>
+                <dl class="row">  
+                    <dt class="col-4 pb-1">Firstname</dt>
+                    <dd class="col-8 pb-1">@Model.Firstname</dd>
+                    <dt class="col-4 pb-1">Surname</dt>
+                    <dd class="col-8 pb-1">@Model.Surname</dd>
+
+                     
+                </dl>
+            </div>
+            
+        </div>
+
+        <!-- Photo -->
+        <div class="col-4">
+            @if (Model.PhotoUrl?.Length > 0)
+            {
+                <img src="@Model.PhotoUrl" class="img-fluid" alt="student photo">
+            } else {
+                <span class="text-info">No photo available</span>
+            }
+        </div>
+
+    </div>    
+</div>
+

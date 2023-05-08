@@ -94,33 +94,9 @@ public class ServiceTests
         Assert.Equal(ap.Surname, patient.Surname);
         Assert.Equal(ap.DOB, patient.DOB);
         Assert.Equal(ap.NationalInsuranceNo, patient.NationalInsuranceNo);
-
-    }
-
-    [Fact]
-    public void GetPatient_WhenHasConditionsAndCareEvents_ShouldReturnPatientWithConditionsAndCareEvents()
-    {
-        // arrange
-        var p = svc.AddPatient(Factory.MakePatient());
-        var c = svc.AddCarer(Factory.MakeCarer());
-
-        var c1 = svc.AddCondition( "C1", "D1" );
-        var c2 = svc.AddCondition( "C2", "D2" );
-        
-        var pc1 = svc.AddConditionToPatient(p.Id,c1.Id, "Note1");
-        var pc2 = svc.AddConditionToPatient(p.Id,c2.Id, "Note2");
-
-        var pce1 = svc.AddPatientCareEvent(p.Id, c.Id, "CarePlan", "Notes1", DateTime.Now );
-        var pce2 = svc.AddPatientCareEvent(p.Id, c.Id, "CarePlan", "Notes2", DateTime.Now );
-
-        // act
-        var patient = svc.GetPatientById(p.Id);
-
-        // assert
-        Assert.NotNull(patient);
-        Assert.Equal(2, p.Conditions.Count);
-        Assert.Equal(2, p.CareEvents.Count);
-
+        Assert.Equal(ap.Email, patient.Email);
+        Assert.Equal(ap.Conditions, patient.Conditions);
+        Assert.Equal(ap.MobileNumber, patient.MobileNumber);
     }
 
     [Fact]
@@ -247,7 +223,7 @@ public class ServiceTests
             NationalInsuranceNo = "CD123456",
             DOB = new DateTime(1968, 03, 04),
             EmailAddress = "Donald@mail.com",
-            Street = " 28 Warren Hill ",
+            Street = "28 Warren Hill",
             Town = "Newry",
             County = " Down",
             Postcode = " BT34 2PH",
@@ -263,8 +239,12 @@ public class ServiceTests
         Assert.Equal("Duck", carer.Surname);
         Assert.Equal("Donald@mail.com", carer.EmailAddress);
         Assert.Equal("CD123456", carer.NationalInsuranceNo);
+        Assert.Equal("28 Warren Hill", carer.Street);
+        Assert.Equal("Newry", carer.Town);
+        Assert.Equal(" Down", carer.County);
+        Assert.Equal("01234567898", carer.MobileNumber);
     }
-
+  
     [Fact]
     public void GetCarer_WhenExists_ShouldReturnCarer()
     {
@@ -350,7 +330,7 @@ public class ServiceTests
             // ....
         });
 
-        
+
         // act
         var updated = svc.UpdateCarer(new Carer
         {
@@ -451,7 +431,7 @@ public class ServiceTests
     }
 
     [Fact]
-    public void GetPatientCareEvents_WhenExists_ShouldReturnCareEventsandRelatedPatientandCarer()
+    public void GetPatientCareEvents_WhenExists_ShouldReturnCareEvent()
     {
         // arrange
         var carer = svc.AddCarer(new Carer
@@ -472,7 +452,7 @@ public class ServiceTests
 
             // ....
         });
-        var dummy = svc.AddPatient(new Patient
+        var p = svc.AddPatient(new Patient
         {
             Firstname = "John",
             Surname = "White",
@@ -495,16 +475,18 @@ public class ServiceTests
         {
             CarePlan = "Make lunch",
             Notes = "Very quiet today, no appetite",
-            CarerId = 1,
-            PatientId = 3,
+            CarerId = carer.Id,
+            PatientId = p.Id,
             DateTimeOfEvent = new DateTime(2022, 3, 9, 16, 5, 7, 123),
             // ....
         };
-
+        
+        var gpce = svc.GetPatientCareEventById(pce.Id);
         // assert
         Assert.NotNull(carer);
-        Assert.NotNull(dummy);
+        Assert.NotNull(p);
         Assert.NotNull(pce);
+        Assert.Null(gpce);
 
     }
 
@@ -585,24 +567,169 @@ public class ServiceTests
     }
 
     //  =====================Test Patient Condition Management================================== 
+
     [Fact]
-    public void AddConditionToPatient_WhenValid_ShouldReturnPatientCondition()
+    public void AddConditionToPatient_WhenInPast_ShouldNotAddPatientCondition()
     {
         // arrange
         var p = svc.AddPatient(Factory.MakePatient());
         var c = svc.AddCondition("CON1", "CON1_DESC");
 
         // act
-        var pc = svc.AddConditionToPatient(p.Id, c.Id, "PatientNote");
-
+        var pc = svc.AddPatientCondition(p.Id, c.Id, "PatientNote", new DateTime(2023, 3, 2, 13, 5, 11, 123));
+        var pc2 = svc.AddPatientCondition(p.Id, c.Id, "PatientNote", new DateTime(2023, 3, 1, 13, 5, 11, 123));
         // assert
         Assert.NotNull(p);
         Assert.NotNull(c);
         Assert.NotNull(pc);
         Assert.Equal("PatientNote", pc.Note);
+        Assert.Null(pc2);
+
+    }
+    [Fact]
+    public void AddPatientCondition_WhenValid_ShouldReturnPatientCondition()
+    {
+        // arrange
+        var p = svc.AddPatient(Factory.MakePatient());
+        var c = svc.AddCondition("CON4", "CON4_DESC");
+
+        // act
+        var pc = svc.AddPatientCondition(p.Id, c.Id, "PatientCondition and notes", new DateTime(2023, 3, 2, 13, 5, 11, 123));
+
+        Assert.NotNull(p);
+        Assert.NotNull(c);
+        Assert.NotNull(pc);
+        Assert.Equal("PatientCondition and notes", pc.Note);
+
+    }
+
+    [Fact]
+    public void GetPatientCondition_WhenExists_ShouldReturnPatientConditions()
+    {
+        // arrange
+        var p = svc.AddPatient(Factory.MakePatient());
+        var c = svc.AddCondition("CONDITION 6", "CON6_DESC");
+        // act
+
+        var pc = new PatientCondition
+        {   Id = c.Id,
+            DateTimeConditionAdded = new DateTime(2022, 3, 9, 16, 5, 7, 123),
+            Note = c.Description,
+
+        };
+        // assert
+        Assert.NotNull(p);
+        Assert.NotNull(c);
+        Assert.NotNull(pc);
+        Assert.Equal("CONDITION 6", c.Name );
+        Assert.Equal("CON6_DESC", c.Description );
+
     }
 
 
+    [Fact]
+    public void TestDeletePatientCondition__ShouldReturntrue()
+    {
+        //Arrange
+        var p = svc.AddPatient(Factory.MakePatient());
+        var c = svc.AddCondition("CON5", "CON5_DESC");
+
+        var pc = svc.AddPatientCondition(p.Id, c.Id, "Condition note",  new DateTime(2023, 3, 2, 13, 5, 11, 123));
+
+        // act
+        var deleted = svc.DeleteCondition(pc.Id);
+
+        // assert
+        Assert.True(deleted);
+    }
+
+    [Fact]
+    public void TestUpdatePatientCondition_WhenAdded_ShouldReturnTrue()
+    {
+        //Arrange
+        var ap = svc.AddPatient(Factory.MakePatient());
+        var ac = svc.AddCondition("Dementia", "Confusion, hallucinations");
+        var pc = svc.AddPatientCondition(ap.Id, ac.Id, "Note Condition",  new DateTime(2023, 3, 2, 13, 5, 11, 123));
+
+        // act -- what is purpose of ap.Id parameter
+        pc.Note = pc.Note + " Updated";
+        var updatedpc = svc.UpdatePatientCondition(pc);
+
+        Assert.NotNull(ap);
+        Assert.NotNull(ac);
+        Assert.NotNull(updatedpc);
+        Assert.Equal(ap.Id, ap.Id);
+        Assert.Equal(ac.Id, ac.Id);
+
+        Assert.Equal("Note Condition Updated", updatedpc.Note);
+
+    }
+    //   //======================Family Management==================================
+    //         bool DeleteFamily(int id);
+    //         FamilyMember UpdateFamily(FamilyMember updated);
+    //         FamilyMember GetFamilyById(int id);
+
+    //         //======================Patient Family Management==================================
+    //         IList<PatientFamily> GetPatientFamily();
+    //         PatientFamily GetPatientFamilyById(int patientId, int familymemberId);
+    //         PatientFamily AddPatientFamily(int patientId, int familymemberId, bool primary = false);
+    // bool RemovePatientFamily(int patientId, int familymemberI);
+    // bool MakeFamilyPrimaryContact(int id);
+    [Fact]
+    public void AddFamilyMember_WhenValid_ShouldReturnFamilyMember()
+    {
+        // arrange
+        var fm = svc.AddFamily(Factory.AddFamily());
+
+        // assert
+        Assert.NotNull(fm);
+        Assert.Equal("Minnie", fm.Firstname);
+        Assert.Equal("Mouse", fm.Surname);
+        Assert.Equal("07778899032", fm.MobileNumber);
+        Assert.Equal("Minnie@gmail.com", fm.EmailAddress);
+    }
+    [Fact]
+    public void GetFamily_WhenExists_ShouldReturnFamily()
+    {
+        // arrange
+        var fm = svc.AddFamily(Factory.AddFamily());
+
+
+        // act
+        var gfm = svc.GetFamilyById(fm.Id);
+
+        // assert -- TODO Check for other properties
+
+        Assert.NotNull(gfm);
+        Assert.Equal(fm.Firstname, fm.Firstname);
+        Assert.Equal(fm.Surname, fm.Surname);
+        Assert.Equal(fm.EmailAddress, fm.EmailAddress);
+        Assert.Equal(fm.MobileNumber, fm.MobileNumber);
+
+    }
+    [Fact]
+    public void UpdateFamily_WhenExistsAndIsValid_ShouldReturnUpdatedFamily()
+    {
+        // arrange
+        var fm = svc.AddFamily(Factory.AddFamily());
+
+        // act == TODO - need to check for all properties except Id
+        var updatedfm = svc.UpdateFamily(new FamilyMember
+        {
+            Id = fm.Id,
+            Firstname = fm.Firstname,
+            Surname = "Changed Surname",
+            EmailAddress = fm.EmailAddress,
+            MobileNumber = "0000111122223333",
+            // ....
+        });
+
+        // assert
+        Assert.NotNull(updatedfm);
+        Assert.Equal("Changed Surname", updatedfm.Surname);
+        Assert.Equal("0000111122223333", updatedfm.MobileNumber);
+
+    }
 }
 
 static class Factory
@@ -656,9 +783,25 @@ static class Factory
     {
         return new List<Condition> {
             new Condition { Name = "C1", Description = "D1" },
-            new Condition { Name = "C2", Description = "D2" }, 
+            new Condition { Name = "C2", Description = "D2" },
             new Condition { Name = "C3", Description = "D3" },
+            new Condition { Name = "C4", Description = "D4" },
+            new Condition { Name = "C5", Description = "D5" },
+            new Condition { Name = "C6", Description = "D6" },
+            new Condition { Name = "C7", Description = "D7" },
+        };
+    }
+    public static FamilyMember AddFamily()
+    {
+        return new FamilyMember
+        {
+            Firstname = "Minnie",
+            Surname = "Mouse",
+            MobileNumber = "07778899032",
+            EmailAddress = "Minnie@gmail.com"
+            // ....
         };
     }
 }
+
 

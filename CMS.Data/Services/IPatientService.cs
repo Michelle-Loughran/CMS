@@ -33,15 +33,15 @@ namespace CMS.Data.Services
         Condition AddCondition(string name, string description);
         bool DeleteCondition(int id);
         Condition UpdateCondition(Condition updated);
-        Condition GetCondition(int id);
+        Condition GetConditionById(int id);
         IList <Condition> GetAllConditions();
 
         //======================Patient Condition Management==================================
-        PatientCondition GetPatientCondition(int patientId, int conditionId);
-        PatientCondition AddConditionToPatient(int patientId, int conditionId, string note);
-        bool RemoveConditionFromPatient(int patientId, int conditionId);
+        IList<PatientCondition> GetAllPatientConditions(string order=null);
+        PatientCondition GetPatientConditionById(int id);
+        PatientCondition AddPatientCondition(int patientId, int conditionId, string note, DateTime on);
+        bool RemovePatientCondition(int conditionId);
         PatientCondition UpdatePatientCondition(PatientCondition updated);
-        IList<PatientCondition> GetAllPatientConditions(int patientId);
 
         //======================Family Management==================================
         FamilyMember AddFamily(FamilyMember fm);
@@ -53,6 +53,10 @@ namespace CMS.Data.Services
         IList<PatientFamily> GetPatientFamily();
         PatientFamily GetPatientFamilyById(int patientId, int familymemberId);
         PatientFamily AddPatientFamily(int patientId, int familymemberId, bool primary = false);
+        PatientFamily UpdatePatientFamily(FamilyMember updated);
+        bool DeletePatientFamily(int id);
+
+
         // bool RemovePatientFamily(int patientId, int familymemberI);
         // bool MakeFamilyPrimaryContact(int id);
       

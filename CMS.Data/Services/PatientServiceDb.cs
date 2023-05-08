@@ -357,7 +357,7 @@ public class PatientServiceDb : IPatientService
     }
 
     // Condition GetConditionById(int id);
-    public Condition GetCondition(int id)
+    public Condition GetConditionById(int id)
     {
         return db.Conditions.FirstOrDefault(c => c.Id == id);
     }
@@ -365,7 +365,7 @@ public class PatientServiceDb : IPatientService
     //Condition DeleteCondition(int id);
     public bool DeleteCondition(int id)
     {
-        var dc = GetCondition(id);
+        var dc = GetConditionById(id);
         if (dc == null)
         {
             return false;
@@ -378,7 +378,7 @@ public class PatientServiceDb : IPatientService
     // Condition UpdateCondition(int id, Condition updated);
     public Condition UpdateCondition(Condition updated)
     {
-        var condition = GetCondition(updated.Id);
+        var condition = GetConditionById(updated.Id);
         if (condition == null)
         {
             return null;
@@ -394,59 +394,85 @@ public class PatientServiceDb : IPatientService
 
     //  ======================Patient Condition Management==================================
 
-    public PatientCondition GetPatientCondition(int patientId, int conditionId)
+    public IList <PatientCondition> GetAllPatientConditions(string order = null)
+    {
+                return db.PatientConditions
+                 .Include(ce => ce.Patient)
+                 .Include(ce => ce.Condition)
+                 .ToList();
+    }
+    public PatientCondition GetPatientConditionById(int id)
     {
         return db.PatientConditions
-                 .FirstOrDefault(pc => pc.PatientId == patientId && pc.ConditionId == conditionId);
-    }
+                .Include(ce => ce.Patient)
+                .Include(ce => ce.Condition)
+                .FirstOrDefault(pc => pc.Id ==id);
 
-    public PatientCondition AddConditionToPatient(int patientId, int conditionId, string note)
+    }
+    public PatientCondition AddPatientCondition(int patientId, int conditionId, string note, DateTime on)
     {
-        var pc = GetPatientCondition(patientId, conditionId);
+        var pc = db.PatientConditions.Where(ce => ce.PatientId == patientId)
+         .OrderByDescending(ce => ce.DateTimeConditionAdded).FirstOrDefault();
+
+        if (pc != null && pc.DateTimeConditionAdded >= on)
+        {
+            return null;
+        }
+
+        //check patient being passed exists
+        var patient = GetPatientById(patientId);
+        var condition = GetConditionById(conditionId);
         if (pc != null)
         {
             return null;
         }
 
-        var patientCondition = new PatientCondition { PatientId = patientId, ConditionId = conditionId, Note = note };
+        if (patient == null || condition == null)
+        {
+            return null; // Patient or Condition does not exist
+        }
+        var patientCondition = new PatientCondition
+        {
+            PatientId = patientId,
+            ConditionId = conditionId,
+            Note = note, 
+            DateTimeConditionAdded = on
+        };
+
+
         db.PatientConditions.Add(patientCondition);
         db.SaveChanges();
         return patientCondition;
     }
 
-    public bool RemoveConditionFromPatient(int patientId, int conditionId)
+    public bool RemovePatientCondition(int conditionId)
     {
-        var pc = GetPatientCondition(patientId, conditionId);
-        if (pc == null)
+        var rpc =db.PatientConditions.FirstOrDefault(e => e.Id == conditionId);
+        if (rpc == null)
         {
             return false;
         }
-        db.PatientConditions.Remove(pc);
+    
+        db.PatientConditions.Remove(rpc);
         db.SaveChanges();
         return true;
     }
 
     public PatientCondition UpdatePatientCondition(PatientCondition updated)
     {
-        var pc = GetPatientCondition(updated.PatientId, updated.ConditionId);
-        if (pc != null)
+        var pc = GetPatientConditionById(updated.Id);
+        if (pc == null)
         {
             return null;
         }
         // update note
+        pc.Id = updated.Id;
         pc.Note = updated.Note;
         db.PatientConditions.Update(pc);
         db.SaveChanges();
         return pc;
     }
 
-    public IList<PatientCondition> GetAllPatientConditions(int patientId)
-    {
-        return db.PatientConditions
-                    .Include(pc => pc.Patient)
-                    .Where(pc => pc.PatientId == patientId)
-                    .ToList();
-    }
 
     //  ======================Family Management==================================
 
@@ -550,9 +576,5 @@ public class PatientServiceDb : IPatientService
         return true;
     }
 
-    // public bool MakeFamilyPrimaryContact(int id)
-    // {
-    //     throw new NotImplementedException();
-    // }
 }
 

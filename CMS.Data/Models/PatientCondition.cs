@@ -7,6 +7,8 @@ public class PatientCondition
 {
     public int Id { get; set; }
 
+    public DateTime DateTimeConditionAdded { get; set; }
+
     // notes on the condition for this patient
     public string Note { get; set; }
 

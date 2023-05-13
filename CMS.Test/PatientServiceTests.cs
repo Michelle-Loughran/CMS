@@ -696,7 +696,7 @@ public class ServiceTests
 
 
         // act
-        var gfm = svc.GetFamilyById(fm.Id);
+        var gfm = svc.GetFamilyMemberById(fm.Id);
 
         // assert -- TODO Check for other properties
 

@@ -513,7 +513,7 @@ public class PatientServiceDb : IPatientService
     public FamilyMember UpdateFamily(FamilyMember updated)
     {
         // verify the student exists
-        var family = GetFamilyById(updated.Id);
+        var family = GetFamilyMemberById(updated.Id);
         if (family == null)
         {
             return null;

@@ -500,7 +500,7 @@ public class PatientServiceDb : IPatientService
 
     public bool DeleteFamily(int id)
     {
-        var f = GetFamilyById(id);
+        var f = GetFamilyMemberById(id);
         if (f == null)
         {
             return false;
@@ -528,32 +528,48 @@ public class PatientServiceDb : IPatientService
         return family;
     }
 
-    public FamilyMember GetFamilyById(int id)
+    public FamilyMember GetFamilyMemberById(int id)
     {
         return db.FamilyMembers
                 .FirstOrDefault(f => f.Id == id);
     }
 
     //======================Patient Family Management==================================
-    public IList<PatientFamily> GetPatientFamily()
+    public IList<PatientFamily> GetPatientFamily(string order = null)
     {
         return db.PatientFamily
-               .ToList();
+            .Include(pf => pf.Patient)
+            .Include(pf => pf.FamilyMember)
+            .ToList();
     }
-    public PatientFamily GetPatientFamilyById(int patientId, int familymemberId)
+    public PatientFamily GetPatientFamilyMemberById(int id)
     {
         return db.PatientFamily
-                 .FirstOrDefault(pf => pf.PatientId == patientId && pf.FamilyMemberId == familymemberId);
+            .Include(pf => pf.Patient)
+            .Include(pf => pf.FamilyMember)
+            .FirstOrDefault(pf => pf.Id == id);
     }
     public PatientFamily AddPatientFamily(int patientId, int familymemberId, bool primary = false)
     {
-        var pf = GetPatientFamilyById(patientId, familymemberId);
-        // var familymember = GetFamilyById(familymemberId);
+        var pf = db.PatientFamily.Where(ce => ce.PatientId == patientId);
+   
         if (pf != null)
         {
             return null;
         }
-        var fp = new PatientFamily
+            var patient = GetPatientById(patientId);
+            var familymember = GetPatientFamilyMemberById(familymemberId);
+
+        if (pf != null)
+        {
+            return null;
+        }
+
+                if (patient == null || familymember == null)
+        {
+            return null; // Patient or Condition does not exist
+        }
+             var fp = new PatientFamily
         {
             PatientId = patientId,
             FamilyMemberId = familymemberId,
@@ -561,17 +577,30 @@ public class PatientServiceDb : IPatientService
         };
         db.PatientFamily.Add(fp);
         db.SaveChanges();
+        return fp;
+    }
+    public PatientFamily UpdatePatientFamily(PatientFamily updated)
+     {
+        var pf = GetPatientFamilyMemberById(updated.Id);
+        if (pf == null)
+        {
+            return null;
+        }
+        // update note
+        pf.Id = updated.Id;
+        pf.FamilyMember = updated.FamilyMember;
+        db.PatientFamily.Update(pf);
+        db.SaveChanges();
         return pf;
     }
-
-    public bool RemovePatientFamily(int patientId, int familymemberId)
+    public bool RemovePatientFamily(int familymemberId)
     {
-        var pf = GetPatientFamilyById(patientId, familymemberId);
-        if (pf == null)
+        var rpf = db.PatientFamily.FirstOrDefault(e => e.Id == familymemberId);
+        if (rpf == null)
         {
             return false;
         }
-        db.PatientFamily.Remove(pf);
+        db.PatientFamily.Remove(rpf);
         db.SaveChanges();
         return true;
     }

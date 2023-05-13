@@ -50,15 +50,13 @@ namespace CMS.Data.Services
         FamilyMember GetFamilyById(int id);
 
         //======================Patient Family Management==================================
-        IList<PatientFamily> GetPatientFamily();
-        PatientFamily GetPatientFamilyById(int patientId, int familymemberId);
+        IList<PatientFamily> GetPatientFamily(string order = null);
+        PatientFamily GetPatientFamilyMemberById(int id);
         PatientFamily AddPatientFamily(int patientId, int familymemberId, bool primary = false);
-        PatientFamily UpdatePatientFamily(FamilyMember updated);
+        PatientFamily UpdatePatientFamily(PatientFamily updated);
         bool DeletePatientFamily(int id);
 
-
-        // bool RemovePatientFamily(int patientId, int familymemberI);
-        // bool MakeFamilyPrimaryContact(int id);
+     
       
     }
 

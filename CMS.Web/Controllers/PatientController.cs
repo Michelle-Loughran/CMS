@@ -7,7 +7,7 @@ namespace CMS.Web.Controllers;
 
 public class PatientController : BaseController
 {
-    private IPatientService svc;
+    private readonly IPatientService svc;
 
     public PatientController()
     {

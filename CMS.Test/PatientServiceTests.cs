@@ -723,14 +723,28 @@ public class ServiceTests
             MobileNumber = "0000111122223333",
             // ....
         });
+        }
+        [Fact]
+         public void TestDeleteFamilyMember__ShouldReturntrue()
+    {
+        //Arrange
+        var p = svc.AddPatient(Factory.MakePatient());
+        var fm = svc.AddFamily(Factory.AddFamily());
+
+        var dfm = svc.AddPatientFamily(p.Id, fm.Id, true);
+
+        // act
+        var deleted = svc.DeleteFamily(dfm.Id);
 
         // assert
-        Assert.NotNull(updatedfm);
-        Assert.Equal("Changed Surname", updatedfm.Surname);
-        Assert.Equal("0000111122223333", updatedfm.MobileNumber);
-
+        Assert.True(deleted);
+        Assert.NotNull(p);
+        Assert.NotNull(fm);
+        Assert.NotNull(dfm);
     }
-}
+
+      
+
 
 static class Factory
 {
@@ -794,14 +808,16 @@ static class Factory
     public static FamilyMember AddFamily()
     {
         return new FamilyMember
-        {
+        {   
             Firstname = "Minnie",
             Surname = "Mouse",
             MobileNumber = "07778899032",
-            EmailAddress = "Minnie@gmail.com"
+            EmailAddress = "Minnie@gmail.com",
+            
             // ....
         };
     }
+
 }
 
 

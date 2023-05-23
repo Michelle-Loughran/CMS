@@ -30,11 +30,12 @@ namespace CMS.Data.Services
         PatientCareEvent UpdatePatientCareEvent(PatientCareEvent updated);
 
         //=============================Condition Management===================================
-        Condition AddCondition(string name, string description);
+        IList<Condition> GetAllConditions(string order=null);
+        Condition AddCondition(Condition condition);
         bool DeleteCondition(int id);
         Condition UpdateCondition(Condition updated);
         Condition GetConditionById(int id);
-        IList <Condition> GetAllConditions();
+    
 
         //======================Patient Condition Management==================================
         IList<PatientCondition> GetAllPatientConditions(string order=null);
@@ -44,6 +45,7 @@ namespace CMS.Data.Services
         PatientCondition UpdatePatientCondition(PatientCondition updated);
 
         //======================Family Management==================================
+        IList<FamilyMember> GetAllFamilies(string order = null);
         FamilyMember AddFamily(FamilyMember fm);
         bool DeleteFamily(int id);
         FamilyMember UpdateFamily(FamilyMember updated);

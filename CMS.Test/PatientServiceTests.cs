@@ -664,17 +664,9 @@ public class ServiceTests
         Assert.Equal("Note Condition Updated", updatedpc.Note);
 
     }
-    //   //======================Family Management==================================
-    //         bool DeleteFamily(int id);
-    //         FamilyMember UpdateFamily(FamilyMember updated);
-    //         FamilyMember GetFamilyById(int id);
+    //======================Family Management Testss=================================
+     //======================Patient Family Management Tests==================================
 
-    //         //======================Patient Family Management==================================
-    //         IList<PatientFamily> GetPatientFamily();
-    //         PatientFamily GetPatientFamilyById(int patientId, int familymemberId);
-    //         PatientFamily AddPatientFamily(int patientId, int familymemberId, bool primary = false);
-    // bool RemovePatientFamily(int patientId, int familymemberI);
-    // bool MakeFamilyPrimaryContact(int id);
     [Fact]
     public void AddFamilyMember_WhenValid_ShouldReturnFamilyMember()
     {
@@ -724,26 +716,25 @@ public class ServiceTests
             // ....
         });
         }
-    //     [Fact]
-    //      public void TestDeleteFamilyMember__ShouldReturntrue()
-    // {
-    //     //Arrange
-    //     var p = svc.AddPatient(Factory.MakePatient());
-    //     var fm = svc.AddFamily(Factory.AddFamily());
+        [Fact]
+    public void TestRemovePatientFamilyMember__ShouldReturntrue()
+    {
+        //Arrange
+        var p = svc.AddPatient(Factory.MakePatient());
+        var fm = svc.AddFamily(Factory.AddFamily());
+        var pf = svc.AddPatientFamily( p.Id,fm.Id, true);
 
-    //     var afm = svc.AddPatientFamily(p.Id, fm.Id, true);
+        // act
+        var dpfm = svc.RemovePatientFamily(pf.Id);
 
-    //     // act
-    //     var dpf = svc.DeleteFamily(afm.Id);
+        // assert
+        Assert.True(dpfm);
+        Assert.NotNull(p);
+        Assert.NotNull(fm);
+        Assert.NotNull(pf);       
+    }
 
-    //     // assert
-    //     Assert.True(dpf);
-    //     Assert.NotNull(p);
-    //     Assert.NotNull(fm);
-    //     Assert.NotNull(afm);       
-    // }
-
-      
+} 
 
 
 static class Factory
@@ -818,6 +809,6 @@ static class Factory
         };
     }
          
-    }}
+    }
 
 

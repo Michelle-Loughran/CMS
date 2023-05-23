@@ -328,9 +328,9 @@ public class PatientServiceDb : IPatientService
     }
 
     //  ====================== Condition Management==================================
-    public Condition AddCondition(string name, string description)
+    public Condition AddCondition(Condition con)
     {
-        var exists = db.Conditions.FirstOrDefault(c => c.Name == name);
+        var exists = db.Conditions.FirstOrDefault(c => c.Name == con.Name);
         if (exists != null)
         {
             return null; // Patient does not exist
@@ -338,8 +338,8 @@ public class PatientServiceDb : IPatientService
 
         var condition = new Condition
         {
-            Name = name,
-            Description = description
+            Name = con.Name,
+            Description = con.Description
 
         };
 
@@ -348,7 +348,7 @@ public class PatientServiceDb : IPatientService
         return condition;
     }
 
-    public IList<Condition> GetAllConditions()
+    public IList<Condition> GetAllConditions(string order=null)
     {
         return db.Conditions
             .Include(c => c.Name)
@@ -477,6 +477,10 @@ public class PatientServiceDb : IPatientService
     //  ======================Family Management==================================
 
     // missing attributes
+        public IList<FamilyMember> GetAllFamilies(string order = null)
+    {
+        return db.FamilyMembers.ToList();
+    }
     public FamilyMember AddFamily(FamilyMember added)
     {
         var exists = db.FamilyMembers.FirstOrDefault(f => f.EmailAddress ==  added.EmailAddress);

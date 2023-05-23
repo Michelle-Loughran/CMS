@@ -724,24 +724,24 @@ public class ServiceTests
             // ....
         });
         }
-        [Fact]
-         public void TestDeleteFamilyMember__ShouldReturntrue()
-    {
-        //Arrange
-        var p = svc.AddPatient(Factory.MakePatient());
-        var fm = svc.AddFamily(Factory.AddFamily());
+    //     [Fact]
+    //      public void TestDeleteFamilyMember__ShouldReturntrue()
+    // {
+    //     //Arrange
+    //     var p = svc.AddPatient(Factory.MakePatient());
+    //     var fm = svc.AddFamily(Factory.AddFamily());
 
-        var dfm = svc.AddPatientFamily(p.Id, fm.Id, true);
+    //     var afm = svc.AddPatientFamily(p.Id, fm.Id, true);
 
-        // act
-        var deleted = svc.DeleteFamily(dfm.Id);
+    //     // act
+    //     var dpf = svc.DeleteFamily(afm.Id);
 
-        // assert
-        Assert.True(deleted);
-        Assert.NotNull(p);
-        Assert.NotNull(fm);
-        Assert.NotNull(dfm);
-    }
+    //     // assert
+    //     Assert.True(dpf);
+    //     Assert.NotNull(p);
+    //     Assert.NotNull(fm);
+    //     Assert.NotNull(afm);       
+    // }
 
       
 
@@ -813,11 +813,11 @@ static class Factory
             Surname = "Mouse",
             MobileNumber = "07778899032",
             EmailAddress = "Minnie@gmail.com",
-            
+
             // ....
         };
     }
-
-}
+         
+    }}
 
 

@@ -1,17 +1,26 @@
-@model Patient
+@model FamilyMember
 
 <div class="card rounded shadow p-4">
-  <h3 class="mb-4">Delete Patient <span class="ms-3 text-danger fs-5">Are you sure?</span></h3> 
+  <h3 class="mb-4">Delete Family Member <span class="ms-3 text-danger fs-5">Are you sure?</span></h3> 
   
 
-  <!-- display the patient using a <dl> as per Details.cshtml -->     
+  <!-- display the family using a <dl> as per Details.cshtml -->     
   <dl class="row">  
     <dt class="col-4 pb-1">Firstname</dt>
     <dd class="col-8 pb-1">@Model.Firstname</dd>
 
     <dt class="col-4 pb-1">Surname</dt>
     <dd class="col-8 pb-1">@Model.Surname</dd>
-       
+
+    <dt class="col-4 pb-1">MobileNumber</dt>
+    <dd class="col-8 pb-1">@Model.MobileNumber</dd>
+
+    <dt class="col-4 pb-1">EmailAddress</dt>
+    <dd class="col-8 pb-1">@Model.EmailAddress</dd>
+
+    <dt class="col-4 pb-1">PatientFamily</dt>
+    <dd class="col-8 pb-1">@Model.PatientFamily</dd>
+
   </dl>
   <div class="mt-4">
     <!-- form to submit post request to DeleteConfirm action     --> 

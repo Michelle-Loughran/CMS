@@ -17,7 +17,15 @@ public class HomeController : Controller
     {
         return View();
     }
-
+ public IActionResult About()
+        {
+            var about = new AboutViewModel {
+                Title = "About",
+                Message = "For MScProject, This Project aims to illustrate a Carer / Patient Management System.",
+                Formed = new DateTime(2023,05,24)
+            };
+            return View(about);
+        }
     public IActionResult Privacy()
     {
         return View();

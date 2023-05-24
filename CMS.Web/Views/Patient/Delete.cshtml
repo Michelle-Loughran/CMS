@@ -1,5 +1,11 @@
 @model Patient
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Patient" asp-action="Index">Patients</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Delete</li>
+    </ol>
+</nav>
 <div class="card rounded shadow p-4">
   <h3 class="mb-4">Delete Patient <span class="ms-3 text-danger fs-5">Are you sure?</span></h3> 
   
@@ -11,6 +17,12 @@
 
     <dt class="col-4 pb-1">Surname</dt>
     <dd class="col-8 pb-1">@Model.Surname</dd>
+
+    <dt class="col-4 pb-1">NationalInsuranceNo</dt>
+    <dd class="col-8 pb-1">@Model.NationalInsuranceNo</dd>
+
+    <dt class="col-4 pb-1">DOB</dt>
+    <dd class="col-8 pb-1">@Model.DOB</dd>
        
   </dl>
   <div class="mt-4">

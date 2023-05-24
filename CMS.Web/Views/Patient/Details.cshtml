@@ -1,6 +1,12 @@
 @model Patient
 
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Patients" asp-action="Index">Patients</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Details</li>
+    </ol>
+</nav>
 <div class="card rounded shadow p-4">
     <!-- Display patient  details -->
     <div class="row">
@@ -20,7 +26,7 @@
                     <dd class="col-8 pb-1">@Model.NationalInsuranceNo</dd>
                     <dt class="col-4 pb-1">DOB</dt>
                     <dd class="col-8 pb-1">@Model.DOB</dd>
-                     
+                  
                 </dl>
             </div>
             
@@ -28,9 +34,9 @@
 
         <!-- Photo -->
         <div class="col-4">
-            @if (Model.PhotoUrl?.Length > 0)
+            @if (Model.PhotoUrl?.Length >0)
             {
-                <img src="@Model.PhotoUrl" class="img-fluid" alt="student photo">
+                <img src="@Model.PhotoUrl" class="img-fluid" alt="patient photo">
             } else {
                 <span class="text-info">No photo available</span>
             }

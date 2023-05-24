@@ -60,7 +60,7 @@ public class Patient
 
 
     // readonly
-    public int Age => (DateTime.Now - DOB).Days / 365;
+    public double Age => (DateTime.Now - DOB).Days / 365.242199;
    
     // Relationships
 

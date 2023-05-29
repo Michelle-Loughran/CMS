@@ -39,7 +39,7 @@ public class Patient
  
     public string Postcode { get; set; } = string.Empty;
 
-    [Required]
+    
     public  string PhotoUrl { get; set; } = string.Empty;
 
     [Required]

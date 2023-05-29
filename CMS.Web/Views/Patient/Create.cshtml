@@ -93,8 +93,10 @@
         <label asp-for="PhotoUrl" class="control-label">PhotoUrl (URL Link)</label>
         <input asp-for="PhotoUrl" class="form-control"/>
         <span asp-validation-for="PhotoUrl" class="text-danger"></span>
-         </div>
-         
+         @* </div>
+         <div class="col">
+              <img src="@Model.Photo" class="img-fluid"> 
+            </div> *@
         <!-- MobileNumber -->
         <div class="row mt-3">
         <div class="col">

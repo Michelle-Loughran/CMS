@@ -11,7 +11,7 @@ public static class ServiceSeeder
         svc.Initialise();
 
         // add patient data
-        var p1 = svc.AddPatient( new Patient {
+        var p = svc.AddPatient( new Patient {
             Firstname = "Joe",
             Surname = "Bloggs",
             // DOB = "24.05.1945",
@@ -26,11 +26,30 @@ public static class ServiceSeeder
             //  ....
         });   
 
-        var p2 = svc.AddPatient( new Patient {
+        var p1 = svc.AddPatient( new Patient {
             Firstname = "Fred",
             Surname = "Bloggs",
             Email = "Fred@mail.com",
-            NationalInsuranceNo = "45678"
+            NationalInsuranceNo = "45678",
+            Street = "24 Warren Hill",
+            Town = "Newry",
+            County = "Down",
+            Country = "Northern Ireland",
+            Postcode = "BT34 2PH",
+            PhotoUrl = "CMS.Web/wwwroot/images/Caregiver_with_seniorman_son.jpg"
+            // ....
+        });
+            var p3 = svc.AddPatient( new Patient {
+            Firstname = "Tom",
+            Surname = "Bloggs",
+            Email = "Tom@mail.com",
+            NationalInsuranceNo = "45678",
+            Street = "24 Warren Hill",
+            Town = "Newry",
+            County = "Down",
+            Country = "Northern Ireland",
+            Postcode = "BT34 2PH",
+            PhotoUrl = "CMS.Web/wwwroot/images/Caregiver_with_seniorman_son.jpg"
             // ....
         });  
 

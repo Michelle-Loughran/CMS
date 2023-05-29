@@ -1,6 +1,6 @@
 namespace CMS.Data.Models;
 
-public enum Role { manager, carer, family }
+public enum Role { admin, manager, carer, family }
 public class User
 {
     public int Id { get; set; }

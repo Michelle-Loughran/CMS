@@ -49,9 +49,9 @@ public class PatientServiceDb : IPatientService
     //Create a new patient and store to the Database
     public Patient AddPatient(Patient p)
     {
-
         //check patient being passed does not exist
-        var exists = db.Patients.FirstOrDefault(e => e.NationalInsuranceNo == p.NationalInsuranceNo);
+        var exists = GetPatientById(p.Id);
+        
         if (exists != null)
         {
             return null; // Patient cannot be added as they already exist

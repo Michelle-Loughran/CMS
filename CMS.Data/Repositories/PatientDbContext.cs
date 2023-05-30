@@ -12,13 +12,12 @@ public class PatientDbContext : DbContext
     public DbSet<PatientCondition> PatientConditions { get; set; }
     public DbSet<FamilyMember> FamilyMembers { get; set; }
     public DbSet<PatientFamily> PatientFamily { get; set; }
-
     public DbSet<PatientCareEvent> PatientCareEvents { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         options.UseSqlite("Filename= data.db")
-               //.LogTo(Console.WriteLine, LogLevel.Information)
+            //    .LogTo(Console.WriteLine, LogLevel.Information)
                ;
 
     }

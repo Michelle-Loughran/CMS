@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-    namespace CMS.Web
+    namespace CMS.Web.Models
     {
        public class AboutViewModel
        {

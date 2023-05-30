@@ -1,7 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+ using System;
+using System.Collections.Generic;
+ using System.Diagnostics;
+ using System.Linq;
+ using System.Threading.Tasks;
+ using Microsoft.Extensions.Logging;
 
 using CMS.Data.Services;
 using CMS.Data.Models;
+using CMS.Web.Models;
 
 namespace CMS.Web.Controllers;
 
@@ -10,15 +17,16 @@ public class PatientController : BaseController
     private readonly IPatientService svc;
 
     public PatientController()
+    
     {
         svc = new PatientServiceDb();
     }
 
     // GET /patient
-    public IActionResult Index()
+    public IActionResult Index(string patientSearch)
     {
         // load patients using service and pass to view
-        var patients = svc.GetAllPatients();
+        var patients = svc.GetAllPatients(patientSearch);
         
         return View(patients);
     }
@@ -41,7 +49,9 @@ public class PatientController : BaseController
     public IActionResult Create()
     {
         // display blank form to create a patient
-        return View();
+        var p = new Patient();
+        //return the new patient to the view
+        return View(p);
     }
 
     // POST /patient/create
@@ -53,7 +63,7 @@ public class PatientController : BaseController
         // complete POST action to add patient
         if (ModelState.IsValid)
         {
-            // call service Addpatient method using data in s
+            // call service Addpatient method using data in p
             var patient = svc.AddPatient(p);
             if (patient is null) 
             {

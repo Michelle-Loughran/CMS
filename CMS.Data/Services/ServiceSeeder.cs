@@ -12,6 +12,7 @@ public static class ServiceSeeder
 
         // add patient data
         var p = svc.AddPatient( new Patient {
+            Title = "Mr",
             Firstname = "Joe",
             Surname = "Bloggs",
             // DOB = "24.05.1945",
@@ -24,9 +25,11 @@ public static class ServiceSeeder
             Postcode = "BT34 2PH",
             PhotoUrl = "CMS.Web/wwwroot/images/Caregiver_with_seniorman_son.jpg"
             //  ....
-        });   
+        });  
+        svc.AddPatient(p); 
 
-        var p1 = svc.AddPatient( new Patient {
+        var p2 = svc.AddPatient( new Patient {
+            Title = "Mr",
             Firstname = "Fred",
             Surname = "Bloggs",
             Email = "Fred@mail.com",
@@ -39,7 +42,10 @@ public static class ServiceSeeder
             PhotoUrl = "CMS.Web/wwwroot/images/Caregiver_with_seniorman_son.jpg"
             // ....
         });
+         svc.AddPatient(p2);
+
             var p3 = svc.AddPatient( new Patient {
+            Title = "Mr",
             Firstname = "Tom",
             Surname = "Bloggs",
             Email = "Tom@mail.com",
@@ -51,7 +57,8 @@ public static class ServiceSeeder
             Postcode = "BT34 2PH",
             PhotoUrl = "CMS.Web/wwwroot/images/Caregiver_with_seniorman_son.jpg"
             // ....
-        });  
+        }); 
+         svc.AddPatient(p3);  
 
             var c1 = svc.AddCarer( new Carer {
             Firstname = "Mickey",

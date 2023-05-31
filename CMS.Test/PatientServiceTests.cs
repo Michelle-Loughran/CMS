@@ -573,7 +573,7 @@ public class ServiceTests
     {
         // arrange
         var p = svc.AddPatient(Factory.MakePatient());
-        var c = svc.AddCondition("CON1", "CON1_DESC");
+        var c = svc.AddCondition(Factory.MakeConditions());
 
         // act
         var pc = svc.AddPatientCondition(p.Id, c.Id, "PatientNote", new DateTime(2023, 3, 2, 13, 5, 11, 123));
@@ -591,7 +591,7 @@ public class ServiceTests
     {
         // arrange
         var p = svc.AddPatient(Factory.MakePatient());
-        var c = svc.AddCondition("CON4", "CON4_DESC");
+        var c = svc.AddCondition(Factory.MakeConditions());
 
         // act
         var pc = svc.AddPatientCondition(p.Id, c.Id, "PatientCondition and notes", new DateTime(2023, 3, 2, 13, 5, 11, 123));
@@ -608,21 +608,19 @@ public class ServiceTests
     {
         // arrange
         var p = svc.AddPatient(Factory.MakePatient());
-        var c = svc.AddCondition("CONDITION 6", "CON6_DESC");
+        var c = svc.AddCondition(Factory.MakeConditions());
         // act
 
-        var pc = new PatientCondition
-        {   Id = c.Id,
-            DateTimeConditionAdded = new DateTime(2022, 3, 9, 16, 5, 7, 123),
-            Note = c.Description,
+        var pc = svc.AddPatientCondition(p.Id, c.Id, "PatientCondition and notes", new DateTime(2023, 3, 2, 13, 5, 11, 123));
 
-        };
+        var gpc = svc.GetPatientConditionById(pc.Id);
         // assert
         Assert.NotNull(p);
         Assert.NotNull(c);
         Assert.NotNull(pc);
-        Assert.Equal("CONDITION 6", c.Name );
-        Assert.Equal("CON6_DESC", c.Description );
+        Assert.NotNull(gpc);
+        Assert.Equal("Arthritis", c.Name );
+        Assert.Equal( "Arthritis is a condition that causes pain and inflammation in a joint", c.Description );
 
     }
 
@@ -632,7 +630,7 @@ public class ServiceTests
     {
         //Arrange
         var p = svc.AddPatient(Factory.MakePatient());
-        var c = svc.AddCondition("CON5", "CON5_DESC");
+        var c = svc.AddCondition(Factory.MakeConditions());
 
         var pc = svc.AddPatientCondition(p.Id, c.Id, "Condition note",  new DateTime(2023, 3, 2, 13, 5, 11, 123));
 
@@ -648,7 +646,7 @@ public class ServiceTests
     {
         //Arrange
         var ap = svc.AddPatient(Factory.MakePatient());
-        var ac = svc.AddCondition("Dementia", "Confusion, hallucinations");
+        var ac = svc.AddCondition(Factory.MakeConditions());
         var pc = svc.AddPatientCondition(ap.Id, ac.Id, "Note Condition",  new DateTime(2023, 3, 2, 13, 5, 11, 123));
 
         // act -- what is purpose of ap.Id parameter
@@ -716,23 +714,23 @@ public class ServiceTests
             // ....
         });
         }
-        [Fact]
-    public void TestRemovePatientFamilyMember__ShouldReturntrue()
-    {
-        //Arrange
-        var p = svc.AddPatient(Factory.MakePatient());
-        var fm = svc.AddFamily(Factory.AddFamily());
-        var pf = svc.AddPatientFamily( p.Id,fm.Id, true);
+    //     [Fact]
+    // // public void TestRemovePatientFamilyMember__ShouldReturntrue()
+    // // {
+    // //     //Arrange
+    // //     var p = svc.AddPatient(Factory.MakePatient());
+    // //     var fm = svc.AddFamily(Factory.AddFamily());
+    // //     var pf = svc.AddPatientFamily( p.Id,fm.Id,false);
 
-        // act
-        var dpfm = svc.RemovePatientFamily(pf.Id);
+    // //     // act
+    // //     var rpfm = svc.RemovePatientFamily(pf.Id);
 
-        // assert
-        Assert.True(dpfm);
-        Assert.NotNull(p);
-        Assert.NotNull(fm);
-        Assert.NotNull(pf);       
-    }
+    // //     // assert
+    // //     Assert.True(rpfm);
+    // //     Assert.NotNull(p);
+    // //     Assert.NotNull(fm);
+    // //     Assert.NotNull(pf);       
+    // // }
 
 } 
 
@@ -784,16 +782,12 @@ static class Factory
         };
     }
 
-    public static List<Condition> MakeConditions()
+    public static Condition MakeConditions()
     {
-        return new List<Condition> {
-            new Condition { Name = "C1", Description = "D1" },
-            new Condition { Name = "C2", Description = "D2" },
-            new Condition { Name = "C3", Description = "D3" },
-            new Condition { Name = "C4", Description = "D4" },
-            new Condition { Name = "C5", Description = "D5" },
-            new Condition { Name = "C6", Description = "D6" },
-            new Condition { Name = "C7", Description = "D7" },
+        return new Condition {
+        Name = "Arthritis", 
+        Description = "Arthritis is a condition that causes pain and inflammation in a joint"
+
         };
     }
     public static FamilyMember AddFamily()

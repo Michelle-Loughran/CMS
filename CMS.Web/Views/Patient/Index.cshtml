@@ -13,7 +13,7 @@
     </div>
 }
 
-<table class="table">
+    <table class="table table-striped">
     <thead>
         <tr>
             <th>Id</th> <th>Title</th> <th>Firstname</th> <th>Surname</th><th>DOB</th><th>National Insurance No</th> <th>Photo</th>
@@ -22,10 +22,10 @@
     <tbody>
         @foreach(var patient in Model) {
             <tr>
-                <td>@patient.Id</td> <td>@patient.Title</td><td>@patient.Firstname</td> <td>@patient.Surname</td> <td>@patient.NationalInsuranceNo</td><td>@patient.PhotoUrl</td>
+                <td>@patient.Id</td> <td>@patient.Title</td><td>@patient.Firstname</td> <td>@patient.Surname</td> <td>@patient.DOB</td><td>@patient.NationalInsuranceNo</td><td>@patient.PhotoUrl</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@patient.Id">
-                        <i class="material-icons" title="View Patient"><Details></Details></i>
+                        <i class="material-icons" title="View Patient"></i>
                     </a> 
                     @if (User.IsInRole("Admin") || User.IsInRole("Manager")) 
                     {

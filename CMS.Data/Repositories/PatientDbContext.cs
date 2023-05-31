@@ -17,7 +17,7 @@ public class PatientDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         options.UseSqlite("Filename= data.db")
-            //    .LogTo(Console.WriteLine, LogLevel.Information)
+               .LogTo(Console.WriteLine, LogLevel.Information)
                ;
 
     }

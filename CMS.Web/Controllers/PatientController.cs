@@ -22,26 +22,26 @@ public class PatientController : BaseController
         svc = new PatientServiceDb();
     }
 
-    // GET /patient
-    public IActionResult Index(string patientSearch)
+    // GET /patient/ index
+    public IActionResult Index()
     {
         // load patients using service and pass to view
-        var patients = svc.GetAllPatients(patientSearch);
+        var patients = svc.GetAllPatients();
         
         return View(patients);
     }
 
     // GET /patient/details/{id}
     public IActionResult Details(int id)
-    {
+    { 
+        // retrieve the patient with specified id from the service
         var patient = svc.GetPatientById(id);
       
         // check if patient is null and alert/redirect 
-        if (patient is null) {
+        if (patient == null) {
             Alert("Patient Does not Exist", AlertType.warning);
             return RedirectToAction(nameof(Index));
         }
-
         return View(patient);
     }
 
@@ -80,11 +80,11 @@ public class PatientController : BaseController
     // GET /patient/edit/{id}
     public IActionResult Edit(int id)
     {
-        // load the patient using the service
+        // load the patient from the service
         var patient = svc.GetPatientById(id);
 
         // check if patient is null and Alert/Redirect
-        if (patient is null)
+        if (patient == null)
         {
             Alert("Patient not found", AlertType.warning);
             return RedirectToAction(nameof(Index));
@@ -102,10 +102,10 @@ public class PatientController : BaseController
         // complete POST action to save patient changes
         if (ModelState.IsValid)
         {            
-            var patient = svc.UpdatePatient(p);
-            if (patient is null) 
+            var patient = svc.GetPatientById(p.Id);
+            if (patient == null) 
             {
-                Alert("Issue updating the patient", AlertType.warning);
+                Alert("Issue editing the patient", AlertType.warning);
             }
 
             // redirect back to view the patient details

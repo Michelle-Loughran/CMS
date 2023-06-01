@@ -1,66 +1,56 @@
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 namespace CMS.Data.Models;
 
 public class Patient
-{
-    public int Id { get; set; }
-    
-    [Required]
-    public string Title { get; set; } = string.Empty;
 
-    [Required]
-    public string NationalInsuranceNo { get; set; } = string.Empty;
+{    // primary key
+    [Required][Column("Patient_Id")]
+    public int Id { get; set; }
+    public string Title { get; set; } = string.Empty;
     
-    [Required]
-    [StringLength(50, MinimumLength = 1)]
+    [Required][StringLength(80, MinimumLength = 1)]
     public string Firstname { get; set; } = string.Empty;
      
-    [Required]
-    [StringLength(50, MinimumLength = 1)]
+    [Required][StringLength(80, MinimumLength = 1)]
     public string Surname { get; set; } = string.Empty;
-    public DateTime DOB { get; set; }
+
+    [Required][StringLength(10, MinimumLength = 1)]
+    public string NationalInsuranceNo { get; set; } = string.Empty;
+    [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+    [DataType(DataType.Date)]
+    public DateTime DOB { get; set; } 
+        // readonly
+    public double Age => (DateTime.Now - DOB).Days / 365.242199;
     
-    [Required]
-    [StringLength(50, MinimumLength = 1)]
+    [Required][StringLength(50, MinimumLength = 1)]
     public string Street { get; set; } = string.Empty;
               
-    [Required]
-    [StringLength(50, MinimumLength = 1)]
+    [Required][StringLength(50, MinimumLength = 1)]
     public string Town { get; set; } = string.Empty;
     
-    [Required]
-    [StringLength(50, MinimumLength = 1)]
+    [Required][StringLength(50, MinimumLength = 1)]
     public string County { get; set; } = string.Empty;
-    
-    [Required]
-    [StringLength(50, MinimumLength = 1)]
-    public string Country { get; set; } = string.Empty;
- 
+
+    [Required][StringLength(8, MinimumLength = 3)]
     public string Postcode { get; set; } = string.Empty;
 
-    
     public  string PhotoUrl { get; set; } = string.Empty;
 
-    [Required]
+    [Required][StringLength(11)]
     public string MobileNumber { get; set; } = string.Empty;
 
-    [Required]
+     [StringLength(11)]
     public string HomeNumber { get; set; } = string.Empty;
 
-    [Required]
     public string Email { get; set; } = string.Empty;
 
-    [Required]
+   [Required][StringLength(8, MinimumLength = 3)]
     public string GP { get; set; } = string.Empty;
-
+    [Required][StringLength(8, MinimumLength = 3)]
     public string SocialWorker { get; set; } = string.Empty;
 
     public string CarePlan { get; set; }
-
-
-    // readonly
-    public double Age => (DateTime.Now - DOB).Days / 365.242199;
    
     // Relationships
 

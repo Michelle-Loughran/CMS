@@ -15,15 +15,15 @@ public static class ServiceSeeder
             Title = "Mr",
             Firstname = "Joe",
             Surname = "Bloggs",
-            // DOB = "24.05.1945",
+            DOB = new DateTime (1945/03/03),
             Email = "joe@mail.com",
             NationalInsuranceNo = "12343",
             Street = "24 Warren Hill",
             Town = "Newry",
             County = "Down",
-            Country = "Northern Ireland",
             Postcode = "BT34 2PH",
-            PhotoUrl = "CMS.Web/wwwroot/images/Caregiver_with_seniorman_son.jpg"
+            PhotoUrl = "/images/Caregiver_with_seniorman_son.jpg"
+            
             //  ....
         });  
         svc.AddPatient(p); 
@@ -32,14 +32,14 @@ public static class ServiceSeeder
             Title = "Mr",
             Firstname = "Fred",
             Surname = "Bloggs",
+            DOB = new DateTime (1945/02/04),
             Email = "Fred@mail.com",
             NationalInsuranceNo = "45678",
             Street = "24 Warren Hill",
             Town = "Newry",
             County = "Down",
-            Country = "Northern Ireland",
             Postcode = "BT34 2PH",
-            PhotoUrl = "CMS.Web/wwwroot/images/Caregiver_with_seniorman_son.jpg"
+            PhotoUrl = "/images/Caregiver_with_seniorman_son.jpg"
             // ....
         });
          svc.AddPatient(p2);
@@ -48,14 +48,14 @@ public static class ServiceSeeder
             Title = "Mr",
             Firstname = "Tom",
             Surname = "Bloggs",
+            DOB = new DateTime (1947/05/28),
             Email = "Tom@mail.com",
             NationalInsuranceNo = "45678",
             Street = "24 Warren Hill",
             Town = "Newry",
             County = "Down",
-            Country = "Northern Ireland",
             Postcode = "BT34 2PH",
-            PhotoUrl = "CMS.Web/wwwroot/images/Caregiver_with_seniorman_son.jpg"
+            PhotoUrl = "/images/Caregiver_with_seniorman_son.jpg"
             // ....
         }); 
          svc.AddPatient(p3);  
@@ -69,6 +69,7 @@ public static class ServiceSeeder
         // add other dummy data here
         
     }); 
+    svc.AddCarer(c1);  
 }
 }
 

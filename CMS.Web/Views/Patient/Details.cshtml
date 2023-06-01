@@ -1,5 +1,6 @@
 @model Patient
 
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
@@ -7,15 +8,17 @@
         <li class="breadcrumb-item active" aria-current="page">Details</li>
     </ol>
 </nav>
+            <!-- Patient details -->
+                <div>
+                <h2 class="mb-4 text-primary">Patient Details</h2>
+                <dl class="row">  
+
 <div class="card rounded shadow p-4">
     <!-- Display patient  details -->
     <div class="row">
         <!-- Details and Navigation -->
         <div class="col-8 d-flex flex-column justify-content-between">
-            <!-- Patient details -->
-            <div>
-                <h2 class="mb-4 text-primary">Patient Details</h2>
-                <dl class="row">  
+
                     <dt class="col-4 pb-1">Title</dt>
                     <dd class="col-8 pb-1">@Model.Title</dd>
                     <dt class="col-4 pb-1">Firstname</dt>
@@ -32,9 +35,10 @@
                     <dd class="col-8 pb-1">@Model.Town</dd>
                     <dt class="col-4 pb-1">County</dt>
                     <dd class="col-8 pb-1">@Model.County</dd>
-                    <dt class="col-4 pb-1">Country</dt>
+                    <dt class="col-4 pb-1">Photo</dt>
+                    <dd class="col-8 pb-1">@Model.PhotoUrl</dd>
                 </dl>
-            <div class="form-group">
+        <div class="form-group">
           <label for="PhotoUrl">Photo</label>
           <input asp-for = "PhotoUrl" type = "url" class ="form-control"/>
           <span asp-validation-for="PhotoUrl" class = "text-danger"></span>
@@ -45,9 +49,8 @@
 
         <!-- Photo -->
         <div class="col-4">
-
             {
-                <img src="@Model.PhotoUrl" class="img-fluid" alt="patient photo">
+                <img src="@Model.PhotoUrl" width="128" height="128" class="img-fluid" alt="patient photo">
             } 
         </div>
 

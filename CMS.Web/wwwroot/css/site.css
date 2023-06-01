@@ -27,11 +27,11 @@ body {
   margin-bottom: 1.25rem;
   border: 1px solid lightgray;
   border-left-color: silver;
-  border-left-width: .75rem;
+  border-left-width: .50rem;
   border-radius: .25rem;
 }
-.callout-primary {
-  border-left-color: cornflowerblue;
+.callout-info {
+   border-left-color: deepskyblue;
 }
 .callout-info {
   border-left-color: deepskyblue;

@@ -5,19 +5,30 @@ public class Carer
 {
     public int Id { get; set; }
     public string Title  {get; set; } = string.Empty;
+
+    [Required][StringLength(80, MinimumLength = 1)]
     public string Firstname { get; set; }= string.Empty;
+
+    [Required][StringLength(80, MinimumLength = 1)]
     public string Surname { get; set; } = string.Empty;
     public DateTime DOB { get; set; }
-    public int Age => (DateTime.Now - DOB).Days / 365;
+   public double Age => (DateTime.Now - DOB).Days / 365.242199;
+
+     [Required][StringLength(80, MinimumLength = 1)]
     public string NationalInsuranceNo { get; set; } = string.Empty;
     public bool DBSCheck { get; set; }
+
+    [Required][StringLength(80, MinimumLength = 1)]
     public string EmailAddress { get; set; } = string.Empty;
+    [Required][StringLength(80, MinimumLength = 1)]
     public string Street { get; set; } = string.Empty;
+    [Required][StringLength(80, MinimumLength = 1)]
     public string Town { get; set; } = string.Empty;
+    [Required][StringLength(80, MinimumLength = 1)]
     public string County { get; set; } = string.Empty;
-    public string Country { get; set; } = string.Empty;
+    [Required][StringLength(8, MinimumLength = 3)]
     public string Postcode { get; set; } = string.Empty;
-    [Required]
+    [Required][StringLength(11)]
     public string MobileNumber { get; set; } = string.Empty;
     [Required]
     public string HomeNumber { get; set; } = string.Empty;

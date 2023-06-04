@@ -1,23 +1,22 @@
 @model IList<Patient>
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Patients</li>
     </ol>
 </nav>
-      @if (User.IsInRole(Role.manager.ToString()))
-{
+      @* @if (User.IsInRole(Role.manager.ToString())) *@
+
     <div class="mt-4 mb-4">
        <!-- add an action link styled as a button to navigate to Create Action -->
        <a asp-action="Create" class="btn btn-primary btn-sm">Add Patient</a>
     </div>
-}
+
 <div class="card border rounded shadow p-4">
     <h3>Patient List</h3>
     <!-- Title bar -->
     <div class="d-flex align-items-center justify-content-between">
-
-
     <table class="table table-striped">
     <thead>
         <tr>
@@ -30,20 +29,20 @@
                 <td>@p.Id</td> <td>@p.Title</td><td>@p.Firstname</td> <td>@p.Surname</td> <td>@p.DOB</td><td>@p.NationalInsuranceNo</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@p.Id">
-                        <i class="material-icons" title="View Patient"></i>
+                        <i class="material-icons" title="View Patient">View</i>
                     </a> 
-                    @if (User.IsInRole("Admin") || User.IsInRole("Manager")) 
-                    {
+                    @* @if (User.IsInRole("Admin") || User.IsInRole("Manager"))  *@
+                    
                         <a asp-action="Edit" asp-route-id="@p.Id">
                             <i class="material-icons" title="Edit Patient">edit</i>
                         </a> 
-                    } 
-                    @if (User.IsInRole(Role.admin.ToString()))
-                    {
+                    
+                    @* @if (User.IsInRole(Role.admin.ToString())) *@
+                    
                         <a asp-action="Delete" asp-route-id=@p.Id>
                             <i class="material-icons" title="Delete Patient">delete</i>
                         </a>
-                    }
+                    
         
                 </td>
             </tr>

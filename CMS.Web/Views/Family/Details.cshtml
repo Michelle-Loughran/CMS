@@ -1,4 +1,4 @@
-@model Patient
+@model FamilyMember
 
 
 <div class="card rounded shadow p-4">
@@ -8,34 +8,22 @@
         <div class="col-8 d-flex flex-column justify-content-between">
             <!-- Patient details -->
             <div>
-                <h2 class="mb-4 text-primary">Patient Details</h2>
+                <h2 class="mb-4 text-primary">Family Details</h2>
                 <dl class="row">  
-                    <dt class="col-4 pb-1">Title</dt>
-                    <dd class="col-8 pb-1">@Model.Title</dd>
+
                     <dt class="col-4 pb-1">Firstname</dt>
                     <dd class="col-8 pb-1">@Model.Firstname</dd>
                     <dt class="col-4 pb-1">Surname</dt>
                     <dd class="col-8 pb-1">@Model.Surname</dd>
-                    <dt class="col-4 pb-1">NationalInsuranceNo</dt>
-                    <dd class="col-8 pb-1">@Model.NationalInsuranceNo</dd>
-                    <dt class="col-4 pb-1">DOB</dt>
-                    <dd class="col-8 pb-1">@Model.DOB</dd>
-                     
+                    <dt class="col-4 pb-1">MobileNumber</dt>
+                    <dd class="col-8 pb-1">@Model.MobileNumber</dd>
+                    <dt class="col-4 pb-1">EmailAddress</dt>
+                    <dd class="col-8 pb-1">@Model.EmailAddress</dd>
+                    <dt class="col-4 pb-1">PatientFamily</dt>
+                    <dd class="col-8 pb-1">@Model.PatientFamily</dd>
                 </dl>
             </div>
-            
         </div>
-
-        <!-- Photo -->
-        <div class="col-4">
-            @if (Model.PhotoUrl?.Length > 0)
-            {
-                <img src="@Model.PhotoUrl" class="img-fluid" alt="student photo">
-            } else {
-                <span class="text-info">No photo available</span>
-            }
-        </div>
-
     </div>    
 </div>
 

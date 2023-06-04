@@ -17,7 +17,8 @@ public class Patient
 
     [Required][StringLength(10, MinimumLength = 1)]
     public string NationalInsuranceNo { get; set; } = string.Empty;
-    [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+
+    [Display(Name = "DOB")][DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
     [DataType(DataType.Date)]
     public DateTime DOB { get; set; } 
         // readonly
@@ -35,7 +36,7 @@ public class Patient
     [Required][StringLength(8, MinimumLength = 3)]
     public string Postcode { get; set; } = string.Empty;
 
-    public  string PhotoUrl { get; set; } = string.Empty;
+    public  string PhotoUrl { get; set; }
 
     [Required][StringLength(11)]
     public string MobileNumber { get; set; } = string.Empty;
@@ -45,9 +46,9 @@ public class Patient
 
     public string Email { get; set; } = string.Empty;
 
-   [Required][StringLength(8, MinimumLength = 3)]
+   [Required][StringLength(80, MinimumLength = 3)]
     public string GP { get; set; } = string.Empty;
-    [Required][StringLength(8, MinimumLength = 3)]
+    [Required][StringLength(80, MinimumLength = 3)]
     public string SocialWorker { get; set; } = string.Empty;
 
     public string CarePlan { get; set; }

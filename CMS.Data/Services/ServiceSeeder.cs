@@ -22,7 +22,7 @@ public static class ServiceSeeder
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            PhotoUrl = "CMS.Web/wwwroot/images/Caregiver_with_seniorman_son.jpg",
+            PhotoUrl = "https://cdn2.hubspot.net/hubfs/433510/Caregiver%20with%20a%20senior%20man%20and%20his%20son%20at%20home%20LR.jpg",
             MobileNumber = "01234567891",
             HomeNumber = "02830303030",
             GP = "Dr A Blagg",

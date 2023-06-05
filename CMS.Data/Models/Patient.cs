@@ -22,7 +22,7 @@ public class Patient
     [DataType(DataType.Date)]
     public DateTime DOB { get; set; } 
         // readonly
-    public double Age => (DateTime.Now - DOB).Days / 365.242199;
+    public int Age => (DateTime.Now - DOB).Days /365;
     
     [Required][StringLength(50, MinimumLength = 1)]
     public string Street { get; set; } = string.Empty;
@@ -36,6 +36,7 @@ public class Patient
     [Required][StringLength(8, MinimumLength = 3)]
     public string Postcode { get; set; } = string.Empty;
 
+    [Url]    
     public  string PhotoUrl { get; set; }
 
     [Required][StringLength(11)]

@@ -28,7 +28,7 @@
                 <dt class="col-sm-3">NationalInsuranceNo</dt>
                 <dd class="col-sm-9">@Model.NationalInsuranceNo</dd>
                 <dt class="col-sm-3">DOB</dt>
-                <dd class="col-sm-9">@Model.DOB</dd>
+                <dd class="col-sm-9">@Model.DOB.ToShortDateString()</dd>
                 <dt class="col-sm-3">Age</dt>
                 <dd class="col-sm-9">@Model.Age</dd>
                 <dt class="col-sm-3">Street</dt>
@@ -57,9 +57,10 @@
                 <dd class="col-sm-9">@Model.CarePlan </dd>
         <div>
 
+
         <!-- photo -->
             <div class="col-4">
-              <img src="@Model.PhotoUrl" class="img-fluid"> 
+              <img src= "@Model.PhotoUrl" class="img-fluid"> 
             </div>
         </dl>
         </div>

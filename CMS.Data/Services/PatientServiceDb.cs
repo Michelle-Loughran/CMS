@@ -148,7 +148,7 @@ public class PatientServiceDb : IPatientService
     }
 
     // retrieve specific Carer with their main details
-    public Carer GetCarerById(int id)
+       public Carer GetCarerById(int id)
     {
         return db.Carers
                     .Include(c => c.PatientCareEvents) // patient care events carried out by this carer

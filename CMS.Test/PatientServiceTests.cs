@@ -267,7 +267,7 @@ public class ServiceTests
         });
 
         // act
-        var carer = svc.GetCarer(dummy.Id);
+        var carer = svc.GetCarerById(dummy.Id);
 
         // assert
         Assert.NotNull(carer);

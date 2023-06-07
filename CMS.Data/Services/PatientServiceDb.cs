@@ -33,7 +33,7 @@ public class PatientServiceDb : IPatientService
         return db.Patients
                     .Include(p => p.Conditions)
                     .ThenInclude(pc => pc.Condition)
-                    .Include(p => p.Family)
+                    .Include(p => p.Families)
                     .ThenInclude(fm => fm.FamilyMember)
                     .Include(p => p.CareEvents)
                     .ThenInclude(ce => ce.Carer)

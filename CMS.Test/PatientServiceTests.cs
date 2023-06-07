@@ -468,7 +468,7 @@ public class ServiceTests
             GP = " Dr R Campbell",
             SocialWorker = "Cathy Burke ",
             CarePlan = "Get dressed and washed",
-            PhotoUrl = p.PhotoUrl
+            PhotoUrl =  "/images/carer.jpg"
             // ....
         });
 

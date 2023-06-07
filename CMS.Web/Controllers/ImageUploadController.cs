@@ -5,25 +5,29 @@
 // using System.Threading.Tasks;
 // using Microsoft.AspNetCore.Mvc;
 // using Microsoft.Extensions.Logging;
+// using CMS.Data.Services;
+// using CMS.Data.Models;
+// using CMS.Web.Models;
+// using System.Net;
 
 // namespace CMS.Web.Controllers
-// {namespace Bloggie.Web.Controllers
+
 // {
 //     [ApiController]
 //     [Route("api/[controller]")]
 //     public class ImagesController : Controller
 //     {
-//         private readonly IImageRepository imageRepository;
+//         private readonly IPatientService svc;
 
-//         public ImagesController(IImageRepository imageRepository)
-//         {
-//             this.imageRepository = imageRepository;
-//         }
+//         public ImagesController()
+//        {
+//         svc = new PatientServiceDb();
+//     }
 
 //         [HttpPost]
 //         public async Task<IActionResult> UploadAsync(IFormFile file)
 //         {
-//             var imageUrl = await imageRepository.UploadAsync(file);
+//             var imageUrl = await svc.UploadAsync(file);
 
 //             if (imageUrl == null)
 //             {
@@ -55,4 +59,4 @@
 //             return View("Error!");
 //         }
 //     }
-// }
+

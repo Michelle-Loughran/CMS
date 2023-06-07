@@ -32,7 +32,7 @@ namespace CMS.Web.Controllers
     // GET /carers/details/{id}
     public IActionResult Details(int id)
     {
-        var carers = svc.GetCarer(id);
+        var carers = svc.GetCarerById(id);
       
         // check if carers is null and alert/redirect 
         if (carers is null) {
@@ -77,9 +77,9 @@ namespace CMS.Web.Controllers
     public IActionResult Edit(int id)
     {
         // load the Carer using the service
-        var carer = svc.GetCarer(id);
+        var carer = svc.GetCarerById(id);
 
-        // check if family is null and Alert/Redirect
+        // check if Carer is null and Alert/Redirect
         if (carer is null)
         {
             Alert("Carer not found", AlertType.warning);
@@ -116,7 +116,7 @@ namespace CMS.Web.Controllers
     public IActionResult Delete(int id)
     {
         // load the carer using the service
-        var carer = svc.GetCarer(id);
+        var carer = svc.GetCarerById(id);
         // check the returned carer is not null and if so return NotFound()
         if (carer == null)
         {

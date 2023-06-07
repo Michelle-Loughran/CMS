@@ -1,4 +1,4 @@
-@model Patient
+@model CreatePatientViewModel
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -104,14 +104,14 @@
             <span  asp-validation-for="Email" class="text-danger"></span>
         </div>
                <!-------------------photurl-------------> 
-        <div class="form-group">
-        <p>Click on the "Choose File" button to upload a photo:</p>
-        <form action="/action_page.php">
-        <input type="file" id="myFile" name="filename">
-        <input type="submit">
-        </form>
-         </div>
-
+        <!-- add PhotoUrl input group - ensure input field type is url -->
+         <div class="row">
+            <div class="form-group mt-3">
+            <label asp-for="PhotoUrl" class="form-label"></label>
+            <input asp-for="PhotoUrl" class="form-control"/>
+            <span  asp-validation-for="PhotoUrl" class="text-danger"></span>
+        </div>
+    </div>
          <div class="col">
               <img src="@Model.PhotoUrl" class="img-fluid"> 
             </div>

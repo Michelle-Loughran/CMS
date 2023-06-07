@@ -7,6 +7,9 @@
     <!-- locally installed bootstrap stylesheet -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+
+</style>
     </head>
             <body>
                <header>
@@ -27,9 +30,21 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About</a> 
-                                                                            <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="Patient" asp-action="Patients">Patients</a> 
-                                                                            <li class="nav-item">  
+                                        <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-controller="Patient" asp-action="Index">Patients</a> 
+                                        <li class="nav-item">  
+                            <a class="nav-link text-dark" asp-controller="Carer" asp-action="Carers">Carers</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Conditions" asp-action="Conditions">Conditions</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Family" asp-action="Family">Family</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Patient" asp-action="Patients">PatientCareEvents</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Patient" asp-action="Patients">Patient-Conditions</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Patient" asp-action="Patients"><Patient-Family></Patient-Family></a>
+                        <li class="nav-item">
                             </ul>
                         </li>
                     </ul>

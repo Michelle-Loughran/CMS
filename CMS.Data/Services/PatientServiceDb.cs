@@ -74,7 +74,8 @@ public class PatientServiceDb : IPatientService
             Email = p.Email,
             GP = p.GP,
             SocialWorker = p.SocialWorker,
-            CarePlan = p.CarePlan
+            CarePlan = p.CarePlan,
+            PhotoUrl = p.PhotoUrl
             // check for missing attributes
         };
 
@@ -147,7 +148,7 @@ public class PatientServiceDb : IPatientService
     }
 
     // retrieve specific Carer with their main details
-    public Carer GetCarer(int id)
+    public Carer GetCarerById(int id)
     {
         return db.Carers
                     .Include(c => c.PatientCareEvents) // patient care events carried out by this carer

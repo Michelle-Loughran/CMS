@@ -198,7 +198,7 @@ public class PatientServiceDb : IPatientService
     // Delete the carer identified by Id returning true if deleted and false if not found
     public bool DeleteCarer(int carerId)
     {
-        var c = GetCarer(carerId);
+        var c = GetCarerById(carerId);
         if (c == null)
         {
             return false;
@@ -211,7 +211,7 @@ public class PatientServiceDb : IPatientService
     public Carer UpdateCarer(Carer updated)
     {
         // verify the carer exists
-        var carer = GetCarer(updated.Id);
+        var carer = GetCarerById(updated.Id);
         if (carer == null)
         {
             return null;

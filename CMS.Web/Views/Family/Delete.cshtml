@@ -1,7 +1,13 @@
 @model FamilyMember
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Family" asp-action="Index">Families</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Delete</li>
+    </ol>
+</nav>
 <div class="card rounded shadow p-4">
-  <h3 class="mb-4">Delete Family Member <span class="ms-3 text-danger fs-5">Are you sure?</span></h3> 
+  <h3 class="mb-4">Delete Family Member? <span class="ms-3 text-danger fs-5">Are you sure?</span></h3> 
   
 
   <!-- display the family using a <dl> as per Details.cshtml -->     
@@ -19,7 +25,7 @@
     <dd class="col-8 pb-1">@Model.EmailAddress</dd>
 
     <dt class="col-4 pb-1">PatientFamily</dt>
-    <dd class="col-8 pb-1">@Model.PatientFamily</dd>
+    <dd class="col-8 pb-1">@Model.PatientFamilies</dd>
 
   </dl>
   <div class="mt-4">

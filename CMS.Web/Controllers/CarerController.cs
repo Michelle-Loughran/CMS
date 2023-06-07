@@ -20,7 +20,7 @@ namespace CMS.Web.Controllers
         svc = new PatientServiceDb();
     }
 
-    // GET /family
+    // GET /Carers
     public IActionResult Index()
     {
         // load carers using service and pass to view
@@ -47,7 +47,9 @@ namespace CMS.Web.Controllers
     public IActionResult Create()
     {
         // display blank form to create a carer
-        return View();
+        var c = new Carer();
+        //return the new carer to the view
+        return View(c);
     }
 
     // POST /carers/create
@@ -98,10 +100,10 @@ namespace CMS.Web.Controllers
         // complete POST action to save family member changes
         if (ModelState.IsValid)
         {            
-            var carer = svc.UpdateCarer(c);
+            var carer = svc.GetCarerById(c.Id);
             if (carer is null) 
             {
-                Alert("Issue updating the carer", AlertType.warning);
+                Alert("Issue editing the carer", AlertType.warning);
             }
 
             // redirect back to view the patient details
@@ -141,7 +143,7 @@ namespace CMS.Web.Controllers
         }
         else
         {
-            Alert("carercould not  be deleted", AlertType.warning);           
+            Alert("Carer could not  be deleted", AlertType.warning);           
         }
         
         // redirect to the index view

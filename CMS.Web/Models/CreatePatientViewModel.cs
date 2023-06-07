@@ -27,7 +27,7 @@ namespace CMS.Web.Models
         [DataType(DataType.Date)]
         [DateOfBirth(MinAge = 18, MaxAge = 120, ErrorMessage = "Patient must be beween 18 and 120 years old")]
         public DateTime DOB {get; set;}
-        public double Age => (DateTime.Now - DOB).Days / 365.242199;
+        public int Age => (DateTime.Now - DOB).Days / 365;
 
         [Required][StringLength(50, MinimumLength = 1)]
         public string Street { get; set; } = string.Empty;
@@ -57,18 +57,25 @@ namespace CMS.Web.Models
 
         [Required][Url]
         public string PhotoUrl {get; set;}
+       
+        [Required]
+        [Display(Name = "Select CareEvents")]
+        public int CareEvents { get; set; }
 
         [Required]
         [EnumDataType(typeof(Condition))]
         [Display(Name = "Select Condition")]
-        public Condition Condition {get; set;}
+        public Condition Conditions {get; set;}
         
-        public FamilyMember Families {get; set;}
+        [Required]
+        [Display(Name = "Select Family Member")]
+        public FamilyMember FamilyMember {get; set;}
 
         [Required]
         [Display(Name = "Select Family")]
-        public int FamilyId { get; set; }
-           public class DateOfBirthAttribute : ValidationAttribute
+        public int FamilyMemberId { get; set;}
+           
+        public class DateOfBirthAttribute : ValidationAttribute
         {
             public int MinAge { get; set; }
             public int MaxAge { get; set; }

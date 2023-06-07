@@ -47,7 +47,9 @@ namespace CMS.Web.Controllers
     public IActionResult Create()
     {
         // display blank form to create a family member
-        return View();
+        var fm = new FamilyMember();
+        //return the new family member to the view
+        return View(fm);
     }
 
     // POST /family/create
@@ -56,17 +58,17 @@ namespace CMS.Web.Controllers
     public IActionResult Create(FamilyMember fm)
     {   
       
-        // complete POST action to add patient
+        // complete POST action to add family member
         if (ModelState.IsValid)
         {
             // call service Addfamily method using data in svc
-            var family = svc.AddFamily(fm);
-            if (family is null) 
+            var familymember = svc.AddFamily(fm);
+            if (familymember is null) 
             {
                 Alert("Issue creating the family member", AlertType.warning);
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Details), new { Id = family.Id});   
+            return RedirectToAction(nameof(Details), new { Id = familymember.Id});   
         }
         
         // redisplay the form for editing as there are validation errors
@@ -98,10 +100,10 @@ namespace CMS.Web.Controllers
         // complete POST action to save family member changes
         if (ModelState.IsValid)
         {            
-            var family = svc.UpdateFamily(fm);
+            var family = svc.GetFamilyMemberById(fm.Id);
             if (family is null) 
             {
-                Alert("Issue updating the family member", AlertType.warning);
+                Alert("Issue editing the family member", AlertType.warning);
             }
 
             // redirect back to view the patient details
@@ -115,7 +117,7 @@ namespace CMS.Web.Controllers
     // GET / family/delete/{id}   
     public IActionResult Delete(int id)
     {
-        // load the family using the service
+        // load the family member using the service
         var family = svc.GetFamilyMemberById(id);
         // check the returned patient is not null and if so return NotFound()
         if (family == null)
@@ -133,7 +135,7 @@ namespace CMS.Web.Controllers
     [ValidateAntiForgeryToken]   
     public IActionResult DeleteConfirm(int id)
     {
-        // delete patient via service
+        // delete family member via service
         var deleted = svc.DeleteFamily(id);
         if (deleted)
         {

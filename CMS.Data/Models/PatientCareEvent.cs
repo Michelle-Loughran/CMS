@@ -18,10 +18,12 @@ public class PatientCareEvent
     public int PatientId { get; set; }   
     public Patient Patient { get; set; }
 
-
     // the carer who performed the care event
     public int CarerId { get; set; }
     public Carer Carer { get; set; }
+    // the Patient Family members
+    public int PatientFamily  { get; set; }
+    public PatientFamily PatientFamilies { get; set; } 
 
 }
 

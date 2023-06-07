@@ -63,5 +63,7 @@ public class Patient
     public List<PatientCondition> Conditions { get; set; }
 
     // a set of patient family members
-    public List<PatientFamily>  Family { get; set; }
+    public List<PatientFamily>  Families { get; set; }
+    public List<Carer>  Carers { get; set; }
+    
 }

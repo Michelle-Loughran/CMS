@@ -33,6 +33,8 @@ public class Carer
     [Required]
     public string HomeNumber { get; set; } = string.Empty;
     public string Qualifications { get; set; } = string.Empty;
+    [Url]    
+    public  string PhotoUrl { get; set; }
    
     // ...
 
@@ -40,10 +42,14 @@ public class Carer
 
     // a carer has a login account
     // public int UserId { get; set; }
-    // public User User { get; set; } // navigation property
+    // public User User { get; set; } 
 
-    // a carer performs many patient care events
+    // navigation property? Do I need this? I'm not sure
+    public int PatientId { get; set; }
+
+    // a carer performs many patient care events on Patient
     public List<PatientCareEvent> PatientCareEvents { get; set;} = new List<PatientCareEvent>();
+
 }
 
 

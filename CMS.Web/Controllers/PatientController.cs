@@ -145,7 +145,7 @@ public class PatientController : BaseController
         }
         else
         {
-            Alert("patient could not  be deleted", AlertType.warning);           
+            Alert("Patient could not  be deleted", AlertType.warning);           
         }
         
         // redirect to the index view

@@ -18,5 +18,5 @@ public class FamilyMember
     // public User User { get; set; }
 
     // a family member can belong to 1 or more patient families (normally 1)
-    public List<PatientFamily> PatientFamily { get; set;} = new List<PatientFamily>();
+    public List<PatientFamily> PatientFamilies { get; set;} = new List<PatientFamily>();
 }

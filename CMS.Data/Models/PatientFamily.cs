@@ -10,12 +10,12 @@ public class PatientFamily
 
     // relationships
 
-    // the patient related to the familymember
+    //Foreign keys the patient related to the familymember
     public int PatientId { get; set; }
     public Patient Patient { get; set; }
 
 
-    // the family member of the patient
+    //Foreign keys the family member of the patient
     public int FamilyMemberId { get; set; }
     public FamilyMember FamilyMember { get; set; }
 }

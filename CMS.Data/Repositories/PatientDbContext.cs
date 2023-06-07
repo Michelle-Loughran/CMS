@@ -11,7 +11,7 @@ public class PatientDbContext : DbContext
     public DbSet<Condition> Conditions { get; set; }
     public DbSet<PatientCondition> PatientConditions { get; set; }
     public DbSet<FamilyMember> FamilyMembers { get; set; }
-    public DbSet<PatientFamily> PatientFamily { get; set; }
+    public DbSet<PatientFamily> PatientFamilies { get; set; }
     public DbSet<PatientCareEvent> PatientCareEvents { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

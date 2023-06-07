@@ -274,7 +274,7 @@ public class PatientServiceDb : IPatientService
 
         //check patient being passed exists
         var patient = GetPatientById(patientId);
-        var carer = GetCarer(carerId);
+        var carer = GetCarerById(carerId);
 
         if (patient == null || carer == null)
         {
@@ -542,21 +542,21 @@ public class PatientServiceDb : IPatientService
     //======================Patient Family Management==================================
     public IList<PatientFamily> GetPatientFamily(string order = null)
     {
-        return db.PatientFamily
+        return db.PatientFamilies
             .Include(pf => pf.Patient)
             .Include(pf => pf.FamilyMember)
             .ToList();
     }
     public PatientFamily GetPatientFamilyMemberById(int id)
     {
-        return db.PatientFamily
+        return db.PatientFamilies
             .Include(pf => pf.Patient)
             .Include(pf => pf.FamilyMember)
             .FirstOrDefault(pf => pf.Id == id);
     }
     public PatientFamily AddPatientFamily(int patientId, int familymemberId, bool primary = false)
     {
-        var pf = db.PatientFamily.Where(ce => ce.PatientId == patientId);
+        var pf = db.PatientFamilies.Where(ce => ce.PatientId == patientId);
    
         if (pf != null)
         {
@@ -580,7 +580,7 @@ public class PatientServiceDb : IPatientService
             FamilyMemberId = familymemberId,
             Primary = primary,
         };
-        db.PatientFamily.Add(fp);
+        db.PatientFamilies.Add(fp);
         db.SaveChanges();
         return fp;
     }
@@ -594,18 +594,18 @@ public class PatientServiceDb : IPatientService
         // update note
         pf.Id = updated.Id;
         pf.FamilyMember = updated.FamilyMember;
-        db.PatientFamily.Update(pf);
+        db.PatientFamilies.Update(pf);
         db.SaveChanges();
         return pf;
     }
     public bool RemovePatientFamily(int familymemberId)
     {
-        var rpf = db.PatientFamily.FirstOrDefault(e => e.Id == familymemberId);
+        var rpf = db.PatientFamilies.FirstOrDefault(e => e.Id == familymemberId);
         if (rpf == null)
         {
             return false;
         }
-        db.PatientFamily.Remove(rpf);
+        db.PatientFamilies.Remove(rpf);
         db.SaveChanges();
         return true;
     }

@@ -16,7 +16,7 @@ namespace CMS.Data.Services
       
         //======================Carer Management==================================
         IList<Carer> GetAllCarers(string order=null);
-        Carer GetCarer(int id);
+        Carer GetCarerById(int id);
         Carer GetCarerByEmail(string email);
         Carer AddCarer(Carer c );
         bool DeleteCarer(int id);

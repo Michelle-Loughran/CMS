@@ -12,7 +12,6 @@
   <div class="card shadow rounded mt-4 p-3">
 
 <div class="row">
-    <div class="column2">
         <h3 class="mb-4">@Model.Firstname   @Model.Surname  </h3>
         <dl class="row">              
                 <dt class=col-sm-3>Id</dt>
@@ -55,33 +54,24 @@
                 <dd class="col-sm-9">@Model.SocialWorker </dd>
                 <dt class="col-sm-3">CarePlan</dt>
                 <dd class="col-sm-9">@Model.CarePlan </dd>
-                <dt class="col-sm-3">Photo</dt>
-                <dd class="col-sm-9">@Model.PhotoUrl </dd>
-                        <!-- photo -->
-        <div class="column">
-              <img src= "@Model.PhotoUrl" class="img-fluid"> 
-            </div>
-        <div>
         </dl>
-        </div>
-        </div>
-        </div>
-
-    
-
+    <div>
+         <!-- photo -->
+        <div class="col-4">
+              <img src= "@Model.PhotoUrl" class="img-fluid"> 
+         </div>
 
          <!-- action options -->
     <div class="mt-4 mb-4"> 
-                
-        <a asp-controller="Patient" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-light mr-2"><i class="bi bi-pen"></i>
+               
+        <a asp-controller="Patient" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary"><i class="bi bi-pen"></i>
             Edit Patient
         </a>  
-
-        <a asp-controller="Patient" asp-action="Index" class="btn btn-sm btn-light mr-4"><i class="bi bi-list"></i>
+        <a asp-controller="Patient" asp-action="Index" class="btn btn-primary"><i class="bi bi-list"></i>
             Patient List
         </a> 
 
-        <a asp-controller="Patient" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-danger mr-4 text-white"><i class = "bi bi-trash"></i>
+        <a asp-controller="Patient" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary"><i class = "bi bi-trash"></i>
             Delete
         </a> 
       </div>

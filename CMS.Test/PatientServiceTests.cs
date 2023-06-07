@@ -467,7 +467,8 @@ public class ServiceTests
             HomeNumber = "028301234",
             GP = " Dr R Campbell",
             SocialWorker = "Cathy Burke ",
-            CarePlan = "Get dressed and washed"
+            CarePlan = "Get dressed and washed",
+            PhotoUrl = p.PhotoUrl
             // ....
         });
 

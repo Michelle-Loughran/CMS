@@ -21,6 +21,6 @@ public class PatientCondition
     // patient having the condition
     public int PatientId { get; set; }
     public Patient Patient { get; set; }
-    public List<Condition> Conditions { get; set;} = new List<Condition>();
+
 
 }

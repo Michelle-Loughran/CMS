@@ -32,9 +32,8 @@ public class PatientServiceDb : IPatientService
     {
         return db.Patients
                     .Include(p => p.Conditions)
-                    .ThenInclude(pc => pc.Condition)
-                    .Include(p => p.Families)
-                    .ThenInclude(fm => fm.FamilyMember)
+                    // .ThenInclude(pc => pc.Conditions)
+                    // .ThenInclude(fm => fm.FamilyMember)
                     .Include(p => p.CareEvents)
                     .ThenInclude(ce => ce.Carer)
                     .FirstOrDefault(p => p.Id == id);
@@ -75,7 +74,10 @@ public class PatientServiceDb : IPatientService
             GP = p.GP,
             SocialWorker = p.SocialWorker,
             CarePlan = p.CarePlan,
-            PhotoUrl = p.PhotoUrl
+            PhotoUrl = p.PhotoUrl,
+            CareEvents = p.CareEvents,
+            Conditions = p.Conditions,
+
             // check for missing attributes
         };
 
@@ -120,6 +122,7 @@ public class PatientServiceDb : IPatientService
         patient.GP = updated.GP;
         patient.SocialWorker = updated.SocialWorker;
         patient.CarePlan = updated.CarePlan;
+        patient.CareEvents = updated.CareEvents;
         // check for missing attributes
 
         db.SaveChanges();
@@ -165,7 +168,7 @@ public class PatientServiceDb : IPatientService
     public Carer AddCarer(Carer c)
     {
         //check carer being passed does not exist
-        var exists = db.Carers.FirstOrDefault(c => c.NationalInsuranceNo == c.NationalInsuranceNo);
+        var exists = GetCarerById(c.Id);
         if (exists != null)
         {
             return null; // the Carer already exists
@@ -187,6 +190,7 @@ public class PatientServiceDb : IPatientService
             MobileNumber = c.MobileNumber,
             HomeNumber = c.HomeNumber,
             Qualifications = c.Qualifications,
+            PhotoUrl = c.PhotoUrl
         };
 
         //add Carer to database

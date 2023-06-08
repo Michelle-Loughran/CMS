@@ -3,7 +3,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-        <li class="breadcrumb-item"><a asp-controller="Patients" asp-action="Index">Patients</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Patient" asp-action="Index">Patients</a></li>
         <li class="breadcrumb-item active" aria-current="page">Details</li>
     </ol>
 </nav>
@@ -47,12 +47,12 @@
                 <dd class="col-sm-7">@Model.SocialWorker </dd>
                 <dt class="col-sm-5">CarePlan</dt>
                 <dd class="col-sm-7">@Model.CarePlan </dd>
-                <dt class="col-4 pb-1">Patient Care-Events</dt>
-                <dd class="col-8 pb-1">@Model.CareEvents</dd>
+                @* <dt class="col-4 pb-1">Patient Care-Events</dt> *@
+                @* <dd class="col-8 pb-1">@Model.CareEvents</dd>
                 <dt class="col-4 pb-1">Patient Conditions</dt>
-                <dd class="col-8 pb-1">@Model.Conditions</dd>
-                <dt class="col-4 pb-1">Patient Family</dt>
-                <dd class="col-8 pb-1">@Model.Families</dd>
+                <dd class="col-8 pb-1">@Model.Conditions</dd> *@
+                @* <dt class="col-4 pb-1">Patient Family</dt>
+                <dd class="col-8 pb-1">@Model.Families</dd> *@
         </dl>
         </dl>
     </div>

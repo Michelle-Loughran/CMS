@@ -55,15 +55,10 @@ public class Patient
     public string CarePlan { get; set; }
    
     // Relationships
-    public int FamilyMemberId { get; set; }     
+
     // a set of care events 
     public List<PatientCareEvent> CareEvents { get; set; }
-
-    // a set of patient conditions
-    public List<PatientCondition> Conditions { get; set; }
-
-    // a set of patient family members
-    public List<PatientFamily>  Families { get; set; }
-    public List<Carer>  Carers { get; set; }
+    public Condition Conditions { get; set; }
+    public PatientCondition PatientConditions { get; set; }
     
 }

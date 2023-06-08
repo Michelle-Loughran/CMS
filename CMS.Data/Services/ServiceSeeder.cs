@@ -15,38 +15,38 @@ public static class ServiceSeeder
             Title = "Mr",
             Firstname = "Joe",
             Surname = "Bloggs",
-            DOB = new DateTime (1945,03,03),
-            Email = "joe@mail.com",
             NationalInsuranceNo = "NR12345C",
+            DOB = new DateTime (1945,03,03),
             Street = "24 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            
+            PhotoUrl = "/images/1.jpg",
             MobileNumber = "01234567891",
             HomeNumber = "02830303030",
+            Email = "joe@mail.com",
             GP = "Dr A Blagg",
             SocialWorker = " Dr Minnie Mouse",
-            CarePlan = "See File for details",
-            PhotoUrl = "/images/Caregiver.jpg",
+            CarePlan = "See File for details"
+
             //  ....
         });  
         svc.AddPatient(p); 
 
         var p2 = svc.AddPatient( new Patient {
-            Title = "Mr",
-            Firstname = "Fred",
+            Title = "Mrs",
+            Firstname = "Mary",
             Surname = "Bloggs",
-            DOB = new DateTime (1946,02,04),
-            Email = "Fred@mail.com",
             NationalInsuranceNo = "NR23456C",
-            Street = "24 Warren Hill",
+            DOB = new DateTime (1946,02,04),
+            Street = "25 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            PhotoUrl = "/images/Caregiver.jpg",
+            PhotoUrl = "/images/2.jpg",
             MobileNumber = "01234567892",
             HomeNumber = "02830303031",
+            Email = "Mary@mail.com",
             GP = "Dr A Blagg",
             SocialWorker = " Dr Minnie Mouse",
             CarePlan = "See File for details"
@@ -58,16 +58,16 @@ public static class ServiceSeeder
             Title = "Mr",
             Firstname = "Tom",
             Surname = "Bloggs",
-            DOB = new DateTime (1947,05,28),
-            Email = "Tom@mail.com",
             NationalInsuranceNo = "NR34567C",
-            Street = "24 Warren Hill",
+            DOB = new DateTime (1947,05,28),
+            Street = "26 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            PhotoUrl = "/images/Caregiver.jpg",
+            PhotoUrl = "/images/3.jpg",
             MobileNumber = "01234567892",
             HomeNumber = "02830303031",
+            Email = "Tom@mail.com",
             GP = "Dr A Blagg",
             SocialWorker = " Dr Minnie Mouse",
             CarePlan = "See File for details"
@@ -79,16 +79,16 @@ public static class ServiceSeeder
             Title = "Mr",
             Firstname = "Donald",
             Surname = "Bloggs",
-            DOB = new DateTime (1948,05,28),
-            Email = "Donald@mail.com",
             NationalInsuranceNo = "NR45678C",
-            Street = "24 Warren Hill",
+            DOB = new DateTime (1948,05,28),
+            Street = "27 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            PhotoUrl = "/images/Caregiver.jpg",
+            PhotoUrl = "/images/4.jpg",
             MobileNumber = "01234567891",
             HomeNumber = "02830303030",
+            Email = "Donald@mail.com",
             GP = "Dr A Blagg",
             SocialWorker = " Dr Minnie Mouse",
             CarePlan = "See File for details"
@@ -100,16 +100,16 @@ public static class ServiceSeeder
             Title = "Mr",
             Firstname = "Mickey",
             Surname = "Bloggs",
-            DOB = new DateTime (1947,05,28),
-            Email = "Mickey@mail.com",
             NationalInsuranceNo = "NR56789C",
-            Street = "24 Warren Hill",
+            DOB = new DateTime (1947,05,28),    
+            Street = "28 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            PhotoUrl = "/images/Caregiver.jpg",
+            PhotoUrl = "/images/5.jpg",
             MobileNumber = "01234567891",
             HomeNumber = "02830303030",
+            Email = "Mickey@mail.com",
             GP = "Dr A Blagg",
             SocialWorker = " Dr Minnie Mouse",
             CarePlan = "See File for details"
@@ -121,92 +121,125 @@ public static class ServiceSeeder
             Title = "Miss",
             Firstname = "Nancy",
             Surname = "Bloggs",
-            DOB = new DateTime (1953,05,28),
-            Email = "Nancy@mail.com",
             NationalInsuranceNo = "NR67891C",
-            Street = "24 Warren Hill",
+            DOB = new DateTime (1953,05,28),          
+            Street = "29 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-
-            PhotoUrl = "CMS/CMS.Web/wwwroot//images/Caregiver_with_seniorman_son.jpg"
+            PhotoUrl = "/images/6.jpg",
+            MobileNumber = "01234567891",
+            HomeNumber = "02830303030",
+            Email = "Nancy@mail.com",
+            GP = "Dr A Blagg",
+            SocialWorker = " Dr Minnie Mouse",
+            CarePlan = "See File for details"
             // ....
         }); 
          svc.AddPatient(p6);
 
 
            var p7 = svc.AddPatient( new Patient {
-            Title = "Miss",
-            Firstname = "Bunny",
+            Title = "Mr",
+            Firstname = "Brian",
             Surname = "Bloggs",
-            DOB = new DateTime (1953,05,28),
-            Email = "Bunny@mail.com",
             NationalInsuranceNo = "NR789123C",
-            Street = "24 Warren Hill",
+            DOB = new DateTime (1953,05,28),
+            Street = "30 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            PhotoUrl = "/images/Caregiver_with_seniorman_son.jpg"
+            PhotoUrl = "/images/7.jpg",
+            MobileNumber = "01234567891",
+            HomeNumber = "02830303030",
+            Email = "Brian@mail.com",
+            GP = "Dr A Blagg",
+            SocialWorker = " Dr Minnie Mouse",
+            CarePlan = "See File for details"
             // ....
         }); 
          svc.AddPatient(p7);
 
            var p8 = svc.AddPatient( new Patient {
-            Title = "Miss",
-            Firstname = "Nancy",
+            Title = "Mr",
+            Firstname = "Niall",
             Surname = "Bloggs",
-            DOB = new DateTime (1950,05,28),
-            Email = "Tom@mail.com",
             NationalInsuranceNo = "NR891012C",
-            Street = "24 Warren Hill",
+            DOB = new DateTime (1950,05,28),
+            Street = "31 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            PhotoUrl = "/images/Caregiver.jpg",
+            PhotoUrl = "/images/8.jpg",
+            MobileNumber = "01234567891",
+            HomeNumber = "02830303030",
+            Email = "Niall@mail.com",
+            GP = "Dr A Blagg",
+            SocialWorker = " Dr Minnie Mouse",
+            CarePlan = "See File for details"
             // ....
         }); 
          svc.AddPatient(p8);
 
            var p9 = svc.AddPatient( new Patient {
-            Title = "Miss",
-            Firstname = "Minnie",
+            Title = "Mr",
+            Firstname = "Michael",
             Surname = "Bloggs",
-            DOB = new DateTime (1953,05,28),
-            Email = "Tom@mail.com",
             NationalInsuranceNo = "NR910234C",
-            Street = "24 Warren Hill",
+            DOB = new DateTime (1953,05,28),
+            Street = "32 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            PhotoUrl = "/images/Caregiver.jpg",
+            PhotoUrl = "/images/9.jpg",
+            MobileNumber = "01234567891",
+            HomeNumber = "02830303030",
+            Email = "Michael@mail.com",
+            GP = "Dr A Blagg",
+            SocialWorker = " Dr Minnie Mouse",
+            CarePlan = "See File for details"
             // ....
         }); 
          svc.AddPatient(p9);
 
            var p10 = svc.AddPatient( new Patient {
-            Title = "Miss",
-            Firstname = "Mary",
+            Title = "Mr",
+            Firstname = "John",
             Surname = "Bloggs",
-            DOB = new DateTime (1929,05,28),
-            Email = "Mary@mail.com",
             NationalInsuranceNo = "NR101234C",
-            Street = "24 Warren Hill",
+            DOB = new DateTime (1929,05,28),
+            Street = "33 Warren Hill",
             Town = "Newry",
             County = "Down",
             Postcode = "BT34 2PH",
-            PhotoUrl ="/images/Caregiver.jpg",
+            PhotoUrl ="/images/10.jpg",
+            MobileNumber = "01234567891",
+            HomeNumber = "02830303030",
+            Email = "Mary@mail.com",
+            GP = "Dr A Blagg",
+            SocialWorker = " Dr Minnie Mouse",
+            CarePlan = "See File for details"
             // ....
         }); 
          svc.AddPatient(p10);
 
             var c1 = svc.AddCarer( new Carer {
-            Firstname = "Mickey",
-            Surname = "Mouse",
+            Title = "Mr",
+            Firstname = "Michael",
+            Surname = "Hegarty",
+            DOB = new DateTime (1977,05,28), 
+            NationalInsuranceNo = "NR456123D",
+            DBSCheck= true,
             EmailAddress = "Mickey@mail.com",
-            NationalInsuranceNo = "456123"
-        
-        // add other dummy data here
-        
+            Street = "34 Warren Hill",
+            Town = "Newry",
+            County = "Down",
+            Postcode = "BT34 2PH",
+            MobileNumber = "01234567891",
+            HomeNumber = "02830303030",
+            Qualifications = "",
+            PhotoUrl ="/images/Carer1.jpg"
+        // add other dummy data here     
     }); 
     svc.AddCarer(c1);  
 }

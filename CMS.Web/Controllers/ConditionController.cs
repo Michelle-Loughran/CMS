@@ -10,12 +10,11 @@ using CMS.Data.Models;
 
 namespace CMS.Web.Controllers
 {
-    [Route("[controller]")]
-    public class ConditionsController : BaseController
+    public class ConditionController : BaseController
     {
        private readonly IPatientService svc;
 
-    public ConditionsController()
+    public ConditionController()
     {
         svc = new PatientServiceDb();
     }
@@ -39,15 +38,15 @@ namespace CMS.Web.Controllers
             Alert("Condition Does not Exist", AlertType.warning);
             return RedirectToAction(nameof(Index));
         }
-
         return View(condition);
     }
 
     // GET: /condition/create   
     public IActionResult Create()
     {
+        var con  = new Condition();
         // display blank form to create a condition
-        return View();
+        return View(con);
     }
 
     // POST /condition/create
@@ -98,10 +97,10 @@ namespace CMS.Web.Controllers
         // complete POST action to save condition changes
         if (ModelState.IsValid)
         {            
-            var condition = svc.UpdateCondition(con);
+            var condition = svc.GetConditionById(con.Id);
             if (condition is null) 
             {
-                Alert("Issue updating the condition", AlertType.warning);
+                Alert("Issue editing the condition", AlertType.warning);
             }
 
             // redirect back to view the condition details
@@ -120,14 +119,12 @@ namespace CMS.Web.Controllers
         // check the returned condition is not null and if so return NotFound()
         if (condition == null)
         {
-            Alert("condition not found", AlertType.warning);
+            Alert("Condition not found", AlertType.warning);
             return RedirectToAction(nameof(Index));
         }     
-        
-        // pass patient to view for deletion confirmation
+        // pass condition to view for deletion confirmation
         return View(condition);
     }
-
     // POST /condition/delete/{id}
     [HttpPost]
     [ValidateAntiForgeryToken]   
@@ -141,7 +138,7 @@ namespace CMS.Web.Controllers
         }
         else
         {
-            Alert("condition could not  be deleted", AlertType.warning);           
+            Alert("Condition could not  be deleted", AlertType.warning);           
         }
         
         // redirect to the index view

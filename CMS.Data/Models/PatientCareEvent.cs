@@ -10,7 +10,15 @@ public class PatientCareEvent
     public string CarePlan { get; set; } 
 
     // Notes documenting completion of Careplan
-    public string Notes { get; set; } 
+    public string Notes { get; set; }
+
+    public int Calls { get; set; }
+
+    public TimeOnly Call1 { get; set; }
+    public TimeOnly Call2 { get; set; }
+    public TimeOnly Call3 { get; set; }
+    public TimeOnly Call4 { get; set; }
+    public TimeOnly Call5 { get; set; }
 
     // relationships
 

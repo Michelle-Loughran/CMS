@@ -10,7 +10,6 @@ using CMS.Data.Models;
 
 namespace CMS.Web.Controllers
 {
-    [Route("[controller]")]
     public class CarerController : BaseController
     {
         private readonly IPatientService svc;
@@ -32,15 +31,15 @@ namespace CMS.Web.Controllers
     // GET /carers/details/{id}
     public IActionResult Details(int id)
     {
-        var carers = svc.GetCarerById(id);
+        var carer = svc.GetCarerById(id);
       
         // check if carers is null and alert/redirect 
-        if (carers is null) {
+        if (carer is null) {
                 Alert("Carer Does not Exist", AlertType.warning);
             return RedirectToAction(nameof(Index));
         }
 
-        return View(carers);
+        return View(carer);
     }
 
     // GET: /carers/create   
@@ -125,7 +124,6 @@ namespace CMS.Web.Controllers
             Alert("Carer not found", AlertType.warning);
             return RedirectToAction(nameof(Index));
         }     
-        
         // pass carer to view for deletion confirmation
         return View(carer);
     }

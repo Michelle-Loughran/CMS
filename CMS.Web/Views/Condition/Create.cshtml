@@ -1,0 +1,36 @@
+@model Condition
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Condition" asp-action="Index">Conditions</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add Condition Details</li>
+    </ol>
+</nav>
+<div class="card rounded shadow p-4">
+    <h3>Add Condition</h3>
+    <form asp-action="Add">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+</div>
+    <!-- Name Description 2 columns in a row -->
+
+    <div class="row mt-3">
+        <div class="col">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Description" class="form-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

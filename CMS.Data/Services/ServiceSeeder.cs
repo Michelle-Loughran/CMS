@@ -237,11 +237,72 @@ public static class ServiceSeeder
             Postcode = "BT34 2PH",
             MobileNumber = "01234567891",
             HomeNumber = "02830303030",
-            Qualifications = "",
+            Qualifications = "8 GCSE's, Maths, A, English B, Social Care A, Accounts C,Economics C Art B, RE C, PSE C",
             PhotoUrl ="/images/Carer1.jpg"
         // add other dummy data here     
     }); 
     svc.AddCarer(c1);  
+            var c2 = svc.AddCarer( new Carer {
+            Title = "Mrs",
+            Firstname = "Mary",
+            Surname = "Hegarty",
+            DOB = new DateTime (1977,06,28), 
+            NationalInsuranceNo = "NR561234D",
+            DBSCheck= true,
+            EmailAddress = "Mary@mail.com",
+            Street = "34 Warren Hill",
+            Town = "Newry",
+            County = "Down",
+            Postcode = "BT34 2PH",
+            MobileNumber = "01234567891",
+            HomeNumber = "02830303030",
+            Qualifications = "8 GCSE's, Maths, A, English B, Social Care A, Accounts C,Economics C Art B, RE C, PSE C",
+            PhotoUrl ="/images/Carer2.jpg"
+        // add other dummy data here     
+    }); 
+    svc.AddCarer(c2); 
+            var c3 = svc.AddCarer( new Carer {
+            Title = "Mrs",
+            Firstname = "Mary",
+            Surname = "Hasselhoff",
+            DOB = new DateTime (1965,06,30), 
+            NationalInsuranceNo = "NR612345D",
+            DBSCheck= true,
+            EmailAddress = "MaryH@mail.com",
+            Street = "35 Warren Hill",
+            Town = "Newry",
+            County = "Down",
+            Postcode = "BT34 2PH",
+            MobileNumber = "01234567891",
+            HomeNumber = "02830303030",
+            Qualifications = "8 GCSE's, Maths, A, English B, Social Care A, Accounts C,Economics C Art B, RE C, PSE C",
+            PhotoUrl ="/images/Carer2.jpg"
+        // add other dummy data here     
+    }); 
+    svc.AddCarer(c3); 
+            var con1 = svc.AddCondition( new Condition {
+                 
+            Name = "Diabetes",
+            Description = "Diabetes is a condition that causes a person's blood sugar level to become too high. There are 2 main types of diabetes: type 1 diabetes - a lifelong condition where the body's immune system attacks and destroys the cells that produce insulin. type 2 diabetes - where the body does not produce enough insulin, or the body's cells do not react to insulin properly Type 2 diabetes is far more common than type 1. In the UK, over 90% of all adults with diabetes have type 2.High blood sugar that develops during pregnancy is known as gestational diabetes. It usually goes away after giving birth."
+        });
+        //https://www.nhs.uk/conditions/diabetes/
+  
+    svc.AddCondition(con1); 
+            var con2 = svc.AddCondition( new Condition {
+                 
+            Name = "Arthritis",
+            Description = " Arthritis is a common condition that causes pain and inflammation in a joint or joints. Arthritis affects people of all ages, including children. Osteoarthritis and rheumatoid arthritis are the 2 most common types of arthritis."
+        });
+        // https://www.nhs.uk/conditions/arthritis/     
+    svc.AddCondition(con2); 
+
+   
+            var con3 = svc.AddCondition( new Condition {
+                 
+            Name = "Heart Disease",
+            Description = " Coronary heart disease is the term that describes what happens when your heart's blood supply is blocked or interrupted by a build-up of fatty substances in the coronary arteries.."
+        });
+     svc.AddCondition(con3); 
 }
 }
 

@@ -250,6 +250,7 @@ public class PatientServiceDb : IPatientService
     }
 
     //  //======================CareEvent Management==================================
+     
     public IList<PatientCareEvent> GetAllPatientCareEvents(string order = null)
     {
         return db.PatientCareEvents
@@ -333,6 +334,19 @@ public class PatientServiceDb : IPatientService
     }
 
     //  ====================== Condition Management==================================
+        public IList<Condition> GetAllConditions(string order=null)
+    {
+        return db.Conditions.ToList();
+
+    }
+
+    // Condition GetConditionById(int id);
+    public Condition GetConditionById(int id)
+    {
+        return db.Conditions
+         .Include(con => con.Description)
+        .FirstOrDefault(co => co.Id == id);
+    }
     public Condition AddCondition(Condition con)
     {
         var exists = db.Conditions.FirstOrDefault(c => c.Name == con.Name);
@@ -353,19 +367,7 @@ public class PatientServiceDb : IPatientService
         return condition;
     }
 
-    public IList<Condition> GetAllConditions(string order=null)
-    {
-        return db.Conditions
-            .Include(c => c.Name)
-             .Include(c => c.Description)
-            .ToList();
-    }
 
-    // Condition GetConditionById(int id);
-    public Condition GetConditionById(int id)
-    {
-        return db.Conditions.FirstOrDefault(c => c.Id == id);
-    }
 
     //Condition DeleteCondition(int id);
     public bool DeleteCondition(int id)

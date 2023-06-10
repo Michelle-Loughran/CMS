@@ -343,16 +343,19 @@ public class PatientServiceDb : IPatientService
     // Condition GetConditionById(int id);
     public Condition GetConditionById(int id)
     {
-        return db.Conditions
-         .Include(con => con.Description)
-        .FirstOrDefault(co => co.Id == id);
+        return db.Conditions.FirstOrDefault(c => c.Id == id);
+         
+        //  .Include(d => d.Description)
+        // .FirstOrDefault(co => co.Id == id);
+
     }
     public Condition AddCondition(Condition con)
     {
-        var exists = db.Conditions.FirstOrDefault(c => c.Name == con.Name);
+        var exists = GetConditionById(con.Id);
+
         if (exists != null)
         {
-            return null; // Patient does not exist
+            return null; // Condition does not exist
         }
 
         var condition = new Condition
@@ -361,7 +364,7 @@ public class PatientServiceDb : IPatientService
             Description = con.Description
 
         };
-
+        //add condition to database
         db.Conditions.Add(condition);
         db.SaveChanges();
         return condition;

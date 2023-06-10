@@ -3,7 +3,6 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
         <li class="breadcrumb-item"><a asp-controller="Condition" asp-action="Index">Conditions</a></li>
-        @* <li class="breadcrumb-item"><a asp-controller="Carer" asp-action="cancel">Details</a></li> *@
         <li class="breadcrumb-item active" aria-current="page">Edit</li>
     </ol>
 </nav>
@@ -14,11 +13,10 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <!-- hide the id as its not user editable but needs to be in the -->
-        <!-- form to ensure the Carer passed to the controller is complete -->
+        <!-- form to ensure the Condition passed to the controller is complete -->
         <input type="hidden" asp-for="Id" />
 
         <!-- name -->
-
         <div class="row mt-3">
             <div class="col">
                 <label asp-for="Name" class="form-label"></label>

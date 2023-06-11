@@ -242,6 +242,7 @@ public static class ServiceSeeder
         // add other dummy data here     
     }); 
     svc.AddCarer(c1);  
+
             var c2 = svc.AddCarer( new Carer {
             Title = "Mrs",
             Firstname = "Mary",
@@ -303,6 +304,28 @@ public static class ServiceSeeder
             Description = " Coronary heart disease is the term that describes what happens when your heart's blood supply is blocked or interrupted by a build-up of fatty substances in the coronary arteries.."
         });
      svc.AddCondition(con3); 
+
+            var pce1 = svc.AddPatientCareEvent(new PatientCareEvent {
+
+            DateTimeOfEvent = new DateTime(2023, 03, 04),
+            CarePlan = "See Specific tasks for each call.",
+            Issues = "Nothing to report",
+            Calls =  5,
+            Call1 =new TimeOnly (07,00),
+            Call2 =   new TimeOnly (11,00),
+            Call3 = new TimeOnly (13,00),
+            Call4 =  new TimeOnly (16,00),
+            Call5 = new TimeOnly (19,00),
+            PatientId = 1,
+            CarerId = 2
+
+     });
+     svc.AddPatientCareEvent(pce1); 
 }
+        // act -- what is purpose of ap.Id parameter
+
+
+// (int patientId, int carerId,DateTime dateTimeOfEvent, string careplan, string issues, int calls, TimeOnly call1,TimeOnly call2,TimeOnly call3,TimeOnly call4,TimeOnly call5 )
 }
+
 

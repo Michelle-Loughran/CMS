@@ -32,11 +32,9 @@ public class PatientServiceDb : IPatientService
     {
         return db.Patients
                     .Include(p => p.Conditions)
-                    // .ThenInclude(pc => pc.Conditions)
-                    // .ThenInclude(fm => fm.FamilyMember)
-                    .Include(p => p.CareEvents)
+                    .ThenInclude(p => p.CareEvents)
                     .ThenInclude(ce => ce.Carer)
-                    .FirstOrDefault(p => p.Id == id);
+                    .FirstOrDefault(p => p.Id == id);          
     }
 
     public IList<Patient> SearchPatients(string query)
@@ -250,56 +248,64 @@ public class PatientServiceDb : IPatientService
     }
 
     //  //======================CareEvent Management==================================
-     
+
     public IList<PatientCareEvent> GetAllPatientCareEvents(string order = null)
     {
         return db.PatientCareEvents
-                 .Include(ce => ce.Patient)
-                 .Include(ce => ce.Carer)
-                 .ToList();
+        
+            .Include(ce => ce.Patient)
+            .Include(ce => ce.Carer)
+            .Include(cp => cp.CarePlan)
+
+             .ToList();
     }
 
     public PatientCareEvent GetPatientCareEventById(int id)
     {
         return db.PatientCareEvents
-                 .Include(ce => ce.Patient)
-                 .Include(ce => ce.Carer)
+                .Include(ce => ce.Patient)
+                .Include(ce => ce.Carer)
+                // .Include(ct => ct.Calls)
+                // .Include(call => call.Call1)
+                // .Include(call => call.Call2)
+                // .Include(call => call.Call3)
+                // .Include(call => call.Call4)
+                // .Include(call => call.Call5)
+                // .Include(iss => iss.Issues)
                  .FirstOrDefault(pce => pce.Id == id);
     }
 
-    public PatientCareEvent AddPatientCareEvent(int patientId, int carerId, string careplan, string notes, DateTime on)
+    public PatientCareEvent AddPatientCareEvent(PatientCareEvent pce)
     {
-        // check that on is > last care event on
-        var last = db.PatientCareEvents.Where(ce => ce.PatientId == patientId)
-                     .OrderByDescending(ce => ce.DateTimeOfEvent).FirstOrDefault();
-        if (last != null && last.DateTimeOfEvent >= on)
+         var exists = GetPatientCareEventById(pce.Id);
+           
+        if (exists != null)
         {
-            return null;
+            return null; // Careevent  cannot be added as it already exists
         }
 
-        //check patient being passed exists
-        var patient = GetPatientById(patientId);
-        var carer = GetCarerById(carerId);
-
-        if (patient == null || carer == null)
+         var patientCareevent = new PatientCareEvent
         {
-            return null; // Patient or Carer does not exist
-        }
+            DateTimeOfEvent = pce.DateTimeOfEvent,
+            CarePlan = pce.CarePlan,
+            Issues = pce.Issues,
+            Calls = pce.Calls,
+            Call1 = pce.Call1,
+            Call2 = pce.Call2,
+            Call3 = pce.Call3,
+            Call4 = pce.Call4,
+            Call5 = pce.Call5,
+            PatientId = pce.PatientId,
+            CarerId = pce.CarerId
 
-        // update the information for the patientcareevent and save
-        var pc = new PatientCareEvent
-        {
-            PatientId = patientId,
-            CarerId = carerId,
-            CarePlan = careplan,
-            Notes = notes,
-            DateTimeOfEvent = on
+            // check for missing attributes
         };
+       
 
         //add patient to database
-        db.PatientCareEvents.Add(pc);
+        db.PatientCareEvents.Add(patientCareevent);
         db.SaveChanges();
-        return pc;
+        return patientCareevent;
     }
 
 
@@ -327,7 +333,7 @@ public class PatientServiceDb : IPatientService
         patientCareEvent.PatientId = updated.PatientId;
         patientCareEvent.CarerId = updated.CarerId;
         patientCareEvent.CarePlan = updated.CarePlan;
-        patientCareEvent.Notes = updated.Notes;
+        patientCareEvent.Issues = updated.Issues;
         patientCareEvent.DateTimeOfEvent = updated.DateTimeOfEvent;
         db.SaveChanges();
         return patientCareEvent;

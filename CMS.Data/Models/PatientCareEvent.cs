@@ -1,3 +1,5 @@
+
+
 namespace CMS.Data.Models;
 
 public class PatientCareEvent 
@@ -10,7 +12,7 @@ public class PatientCareEvent
     public string CarePlan { get; set; } 
 
     // Notes documenting completion of Careplan
-    public string Notes { get; set; }
+    public string Issues { get; set; }
 
     public int Calls { get; set; }
 
@@ -23,7 +25,8 @@ public class PatientCareEvent
     // relationships
 
     // the patient the care event is performed on
-    public int PatientId { get; set; }   
+    public int PatientId { get; set; }
+
     public Patient Patient { get; set; }
 
     // the carer who performed the care event

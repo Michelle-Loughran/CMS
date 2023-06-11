@@ -25,7 +25,7 @@ namespace CMS.Data.Services
         //======================CareEvent Management==================================
         IList<PatientCareEvent> GetAllPatientCareEvents(string order=null);
         PatientCareEvent GetPatientCareEventById(int id);
-        PatientCareEvent AddPatientCareEvent(int patientId, int carerId, string careplan, string notes, DateTime on);
+        PatientCareEvent AddPatientCareEvent(PatientCareEvent pce);
         bool DeletePatientCareEvent(int careEventId);
         PatientCareEvent UpdatePatientCareEvent(PatientCareEvent updated);
 
@@ -58,7 +58,6 @@ namespace CMS.Data.Services
         PatientFamily AddPatientFamily(int patientId, int familymemberId, bool primary = false);
         PatientFamily UpdatePatientFamily(PatientFamily updated);
         bool RemovePatientFamily(int id);
-      
     }
 
 }

@@ -396,15 +396,26 @@ public class ServiceTests
         var c = svc.AddCarer(Factory.MakeCarer());
 
         // act
-        var pce = svc.AddPatientCareEvent(p.Id, c.Id, "CarePlan",
-                                            "Notes",
-                                            new DateTime(2023, 3, 2, 13, 5, 11, 123));
+        var pce = svc.AddPatientCareEvent(new PatientCareEvent {
 
+            DateTimeOfEvent = new DateTime(2023, 03, 04),
+            CarePlan = "See Specific tasks for each call.",
+            Issues = "Nothing to report",
+            Calls =  5,
+            Call1 =new TimeOnly (07,00),
+            Call2 =   new TimeOnly (11,00),
+            Call3 = new TimeOnly (13,00),
+            Call4 =  new TimeOnly (16,00),
+            Call5 = new TimeOnly (19,00),
+            PatientId = 1,
+            CarerId = 2
+
+     });
         Assert.NotNull(p);
         Assert.NotNull(c);
         Assert.NotNull(pce);
         Assert.Equal("CarePlan", pce.CarePlan);
-        Assert.Equal("Notes", pce.Notes);
+        Assert.Equal("Notes", pce.Issues);
 
     }
 
@@ -414,14 +425,38 @@ public class ServiceTests
         // arrange
         var p = svc.AddPatient(Factory.MakePatient());
         var c = svc.AddCarer(Factory.MakeCarer());
-        var pce1 = svc.AddPatientCareEvent(p.Id, c.Id, "CarePlan",
-                                            "Notes",
-                                            new DateTime(2023, 3, 2, 13, 5, 11, 123));
+        var pce1 = svc.AddPatientCareEvent(new PatientCareEvent {
+
+            DateTimeOfEvent = new DateTime(2023, 03, 04),
+            CarePlan = "See Specific tasks for each call.",
+            Issues = "Nothing to report",
+            Calls =  5,
+            Call1 =new TimeOnly (07,00),
+            Call2 =   new TimeOnly (11,00),
+            Call3 = new TimeOnly (13,00),
+            Call4 =  new TimeOnly (16,00),
+            Call5 = new TimeOnly (19,00),
+            PatientId = 1,
+            CarerId = 2
+
+     });
 
         // act - create care event in past (before last care event)
-        var pce2 = svc.AddPatientCareEvent(p.Id, c.Id, "CarePlan",
-                                            "Notes",
-                                            new DateTime(2023, 3, 1, 13, 5, 11, 123));
+        var pce2 = svc.AddPatientCareEvent(new PatientCareEvent {
+
+            DateTimeOfEvent = new DateTime(2023, 03, 04),
+            CarePlan = "See Specific tasks for each call.",
+            Issues = "Nothing to report",
+            Calls =  5,
+            Call1 =new TimeOnly (07,00),
+            Call2 =   new TimeOnly (11,00),
+            Call3 = new TimeOnly (13,00),
+            Call4 =  new TimeOnly (16,00),
+            Call5 = new TimeOnly (19,00),
+            PatientId = 1,
+            CarerId = 2
+
+     });
 
         Assert.NotNull(p);
         Assert.NotNull(c);
@@ -475,7 +510,7 @@ public class ServiceTests
         var pce = new PatientCareEvent
         {
             CarePlan = "Make lunch",
-            Notes = "Very quiet today, no appetite",
+            Issues = "Very quiet today, no appetite",
             CarerId = carer.Id,
             PatientId = p.Id,
             DateTimeOfEvent = new DateTime(2022, 3, 9, 16, 5, 7, 123),
@@ -499,9 +534,21 @@ public class ServiceTests
         var p = svc.AddPatient(Factory.MakePatient());
         var c = svc.AddCarer(Factory.MakeCarer());
 
-        var pce = svc.AddPatientCareEvent(p.Id, c.Id, "Get patient up, washed and dressed",
-                                            "Patient not responding this morning",
-                                            new DateTime(2023, 3, 2, 13, 5, 11, 123));
+        var pce = svc.AddPatientCareEvent(new PatientCareEvent {
+
+            DateTimeOfEvent = new DateTime(2023, 03, 04),
+            CarePlan = "See Specific tasks for each call.",
+            Issues = "Nothing to report",
+            Calls =  5,
+            Call1 =new TimeOnly (07,00),
+            Call2 =   new TimeOnly (11,00),
+            Call3 = new TimeOnly (13,00),
+            Call4 =  new TimeOnly (16,00),
+            Call5 = new TimeOnly (19,00),
+            PatientId = 1,
+            CarerId = 2
+
+     });
 
         // act
         var deleted = svc.DeletePatientCareEvent(pce.Id);
@@ -552,10 +599,23 @@ public class ServiceTests
 
             // ....
         });
-        var pce = svc.AddPatientCareEvent(ap.Id, carer.Id, ap.CarePlan, "Notes", DateTime.Now);
+        var pce = svc.AddPatientCareEvent(new PatientCareEvent {
 
+            DateTimeOfEvent = new DateTime(2023, 03, 04),
+            CarePlan = "See Specific tasks for each call.",
+            Issues = "Nothing to report",
+            Calls =  5,
+            Call1 =new TimeOnly (07,00),
+            Call2 =   new TimeOnly (11,00),
+            Call3 = new TimeOnly (13,00),
+            Call4 =  new TimeOnly (16,00),
+            Call5 = new TimeOnly (19,00),
+            PatientId = 1,
+            CarerId = 2
+
+     });
         // act -- what is purpose of ap.Id parameter
-        pce.Notes = pce.Notes + " Updated";
+        pce.Issues = pce.Issues + " Updated";
         var updatedpce = svc.UpdatePatientCareEvent(pce);
 
         Assert.NotNull(ap);
@@ -563,7 +623,7 @@ public class ServiceTests
         Assert.NotNull(updatedpce);
         Assert.Equal(ap.Id, ap.Id);
         Assert.Equal(carer.Id, carer.Id);
-        Assert.Equal("Notes Updated", updatedpce.Notes);
+        Assert.Equal("Notes Updated", updatedpce.Issues);
 
     }
 

@@ -264,7 +264,7 @@ public class PatientServiceDb : IPatientService
     public PatientCareEvent GetPatientCareEventById(int id)
     {
         return db.PatientCareEvents
-                .Include(dt=> dt.DateTimeOfEvent)
+                // .Include(dt=> dt.DateTimeOfEvent)
                 .Include(ce => ce.Patient)
                 .Include(ce => ce.Carer)
                 .Include(ct => ct.Calls)
@@ -277,9 +277,17 @@ public class PatientServiceDb : IPatientService
                  .FirstOrDefault(pce => pce.Id == id);
     }
 
-    public PatientCareEvent AddPatientCareEvent(PatientCareEvent pce)
+    public PatientCareEvent AddPatientCareEvent(DateTime dt, string careplan, string issues, int calls, TimeOnly call1,TimeOnly call2,TimeOnly call3,TimeOnly call4,TimeOnly call5 ,int patientId, int carerId)
     {
-         var exists = GetPatientCareEventById(pce.Id);
+        var last = db.PatientCareEvents.Where(pce=>pce.PatientId== patientId).OrderByDescending(ce=> ce.DateTimeOfEvent).FirstOrDefault();
+
+        if (last == null || last.DateTimeOfEvent >= dt)
+        {
+            return null; // Careevent  cannot be added as it already exists
+        }
+         var exists = GetPatientById(patientId);
+         var carer = GetCarerById(carerId);
+
            
         if (exists != null)
         {
@@ -288,17 +296,17 @@ public class PatientServiceDb : IPatientService
 
          var patientCareevent = new PatientCareEvent
         {
-            DateTimeOfEvent = pce.DateTimeOfEvent,
-            CarePlan = pce.CarePlan,
-            Issues = pce.Issues,
-            Calls = pce.Calls,
-            Call1 = pce.Call1,
-            Call2 = pce.Call2,
-            Call3 = pce.Call3,
-            Call4 = pce.Call4,
-            Call5 = pce.Call5,
-            PatientId = pce.PatientId,
-            CarerId = pce.CarerId
+            DateTimeOfEvent = dt,
+            CarePlan = careplan,
+            Issues = issues,
+            Calls = calls,
+            Call1 = call1,
+            Call2 = call2,
+            Call3 = call3,
+            Call4 = call4,
+            Call5 = call5 ,
+            PatientId = patientId,
+            CarerId = carerId
 
             // check for missing attributes
         };

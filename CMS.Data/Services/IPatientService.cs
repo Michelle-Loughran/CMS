@@ -25,7 +25,7 @@ namespace CMS.Data.Services
         //======================CareEvent Management==================================
         IList<PatientCareEvent> GetAllPatientCareEvents(string order=null);
         PatientCareEvent GetPatientCareEventById(int id);
-        PatientCareEvent AddPatientCareEvent(PatientCareEvent pce);
+        PatientCareEvent AddPatientCareEvent(DateTime dt, string careplan, string issues, int calls, TimeOnly call1,TimeOnly call2,TimeOnly call3,TimeOnly call4,TimeOnly call5,int patientId, int carerId);
         bool DeletePatientCareEvent(int careEventId);
         PatientCareEvent UpdatePatientCareEvent(PatientCareEvent updated);
 

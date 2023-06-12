@@ -396,21 +396,11 @@ public class ServiceTests
         var c = svc.AddCarer(Factory.MakeCarer());
 
         // act
-        var pce = svc.AddPatientCareEvent(new PatientCareEvent {
+        var pce = svc.AddPatientCareEvent(new DateTime(2023, 03, 04),"See Specific tasks for each call.",
+   "Nothing to report", 5,new TimeOnly (07,00), new TimeOnly (11,00),
+new TimeOnly (13,00), new TimeOnly (16,00), new TimeOnly (19,00),p.Id, c.Id
 
-            DateTimeOfEvent = new DateTime(2023, 03, 04),
-            CarePlan = "See Specific tasks for each call.",
-            Issues = "Nothing to report",
-            Calls =  5,
-            Call1 =new TimeOnly (07,00),
-            Call2 =   new TimeOnly (11,00),
-            Call3 = new TimeOnly (13,00),
-            Call4 =  new TimeOnly (16,00),
-            Call5 = new TimeOnly (19,00),
-            PatientId = 1,
-            CarerId = 2
-
-     });
+     );
         Assert.NotNull(p);
         Assert.NotNull(c);
         Assert.NotNull(pce);
@@ -425,43 +415,14 @@ public class ServiceTests
         // arrange
         var p = svc.AddPatient(Factory.MakePatient());
         var c = svc.AddCarer(Factory.MakeCarer());
-        var pce1 = svc.AddPatientCareEvent(new PatientCareEvent {
-
-            DateTimeOfEvent = new DateTime(2023, 03, 04),
-            CarePlan = "See Specific tasks for each call.",
-            Issues = "Nothing to report",
-            Calls =  5,
-            Call1 =new TimeOnly (07,00),
-            Call2 =   new TimeOnly (11,00),
-            Call3 = new TimeOnly (13,00),
-            Call4 =  new TimeOnly (16,00),
-            Call5 = new TimeOnly (19,00),
-            PatientId = 1,
-            CarerId = 2
-
-     });
+        var pce1 = svc.AddPatientCareEvent(new DateTime(2022, 04, 12),"See Specific tasks for each call.","Nothing to report",4,new TimeOnly (07,30),new TimeOnly (11,30),new TimeOnly (13,30),new TimeOnly (16,30),new TimeOnly (19,00),p.Id,c.Id);
 
         // act - create care event in past (before last care event)
-        var pce2 = svc.AddPatientCareEvent(new PatientCareEvent {
-
-            DateTimeOfEvent = new DateTime(2023, 03, 04),
-            CarePlan = "See Specific tasks for each call.",
-            Issues = "Nothing to report",
-            Calls =  5,
-            Call1 =new TimeOnly (07,00),
-            Call2 =   new TimeOnly (11,00),
-            Call3 = new TimeOnly (13,00),
-            Call4 =  new TimeOnly (16,00),
-            Call5 = new TimeOnly (19,00),
-            PatientId = 1,
-            CarerId = 2
-
-     });
+        var pce2 = svc.AddPatientCareEvent(new DateTime(2023, 03, 04),"See Specific tasks for each call.","Nothing to report",5, new TimeOnly (08,00),new TimeOnly (12,00),new TimeOnly (15,00),new TimeOnly (16,00),new TimeOnly (19,00), p.Id,c.Id);
 
         Assert.NotNull(p);
         Assert.NotNull(c);
         Assert.NotNull(pce1);
-
         Assert.Null(pce2);
     }
 
@@ -534,27 +495,16 @@ public class ServiceTests
         var p = svc.AddPatient(Factory.MakePatient());
         var c = svc.AddCarer(Factory.MakeCarer());
 
-        var pce = svc.AddPatientCareEvent(new PatientCareEvent {
-
-            DateTimeOfEvent = new DateTime(2023, 03, 04),
-            CarePlan = "See Specific tasks for each call.",
-            Issues = "Nothing to report",
-            Calls =  5,
-            Call1 =new TimeOnly (07,00),
-            Call2 =   new TimeOnly (11,00),
-            Call3 = new TimeOnly (13,00),
-            Call4 =  new TimeOnly (16,00),
-            Call5 = new TimeOnly (19,00),
-            PatientId = 1,
-            CarerId = 2
-
-     });
+        var pce = svc.AddPatientCareEvent(new DateTime(2023, 03, 04),"See Specific tasks for each call.","Nothing to report",
+   5, new TimeOnly (07,00),new TimeOnly (11,00),new TimeOnly (13,00),new TimeOnly (16,00),new TimeOnly (19,00),p.Id,c.Id);
 
         // act
         var deleted = svc.DeletePatientCareEvent(pce.Id);
 
         // assert
         Assert.True(deleted);
+        Assert.NotNull(p);
+        Assert.NotNull(c);
     }
 
 
@@ -599,21 +549,7 @@ public class ServiceTests
 
             // ....
         });
-        var pce = svc.AddPatientCareEvent(new PatientCareEvent {
-
-            DateTimeOfEvent = new DateTime(2023, 03, 04),
-            CarePlan = "See Specific tasks for each call.",
-            Issues = "Nothing to report",
-            Calls =  5,
-            Call1 =new TimeOnly (07,00),
-            Call2 =   new TimeOnly (11,00),
-            Call3 = new TimeOnly (13,00),
-            Call4 =  new TimeOnly (16,00),
-            Call5 = new TimeOnly (19,00),
-            PatientId = 1,
-            CarerId = 2
-
-     });
+        var pce = svc.AddPatientCareEvent(new DateTime(2023, 03, 04),"See Specific tasks for each call.","Nothing to report", 5,new TimeOnly (07,00), new TimeOnly (11,00),new TimeOnly (13,00), new TimeOnly (16,00),new TimeOnly (19,00),ap.Id,carer.Id);
         // act -- what is purpose of ap.Id parameter
         pce.Issues = pce.Issues + " Updated";
         var updatedpce = svc.UpdatePatientCareEvent(pce);
@@ -774,6 +710,10 @@ public class ServiceTests
             MobileNumber = "0000111122223333",
             // ....
         });
+        Assert.NotNull(fm);
+        Assert.NotNull(updatedfm);
+        Assert.Equal(fm.Id, fm.Id);
+      
         }
     //     [Fact]
     // // public void TestRemovePatientFamilyMember__ShouldReturntrue()
@@ -862,8 +802,28 @@ static class Factory
 
             // ....
         };
+}
+        // public static PatientCareEvent AddPatientCareEvent()
+        
+        // {
+        // return new PatientCareEvent
+        // {   
+        //     DateTimeOfEvent = new DateTime(2023, 03, 04),
+        //     CarePlan = "See Specific tasks for each call.",
+        //     Issues = "Nothing to report",
+        //     Calls =  5,
+        //     Call1 =new TimeOnly (07,00),
+        //     Call2 =   new TimeOnly (11,00),
+        //     Call3 = new TimeOnly (13,00),
+        //     Call4 =  new TimeOnly (16,00),
+        //     Call5 = new TimeOnly (19,00)
+
+        //     // ....
+        // };
+
     }
+
          
-    }
+    
 
 

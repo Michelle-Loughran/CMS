@@ -255,7 +255,8 @@ public class PatientServiceDb : IPatientService
         
             .Include(ce => ce.Patient)
             .Include(ce => ce.Carer)
-            .Include(cp => cp.CarePlan)
+            .Include(cp => cp.Calls)
+            .Include(iss => iss.Issues)
 
              .ToList();
     }
@@ -263,15 +264,16 @@ public class PatientServiceDb : IPatientService
     public PatientCareEvent GetPatientCareEventById(int id)
     {
         return db.PatientCareEvents
+                .Include(dt=> dt.DateTimeOfEvent)
                 .Include(ce => ce.Patient)
                 .Include(ce => ce.Carer)
-                // .Include(ct => ct.Calls)
-                // .Include(call => call.Call1)
-                // .Include(call => call.Call2)
-                // .Include(call => call.Call3)
-                // .Include(call => call.Call4)
-                // .Include(call => call.Call5)
-                // .Include(iss => iss.Issues)
+                .Include(ct => ct.Calls)
+                .Include(call => call.Call1)
+                .Include(call => call.Call2)
+                .Include(call => call.Call3)
+                .Include(call => call.Call4)
+                .Include(call => call.Call5)
+                .Include(iss => iss.Issues)
                  .FirstOrDefault(pce => pce.Id == id);
     }
 
@@ -300,7 +302,7 @@ public class PatientServiceDb : IPatientService
 
             // check for missing attributes
         };
-       
+    
 
         //add patient to database
         db.PatientCareEvents.Add(patientCareevent);

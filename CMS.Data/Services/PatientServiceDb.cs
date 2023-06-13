@@ -251,28 +251,28 @@ public class PatientServiceDb : IPatientService
 
     public IList<PatientCareEvent> GetAllPatientCareEvents(string order = null)
     {
-        return db.PatientCareEvents
+        return db.PatientCareEvents.ToList();
         
-            .Include(ce => ce.Patient)
-            .Include(ce => ce.Carer)
-            .Include(cp => cp.Calls)
-            .Include(iss => iss.Issues)
+            // .Include(ce => ce.PatientId)
+            // .Include(ce => ce.CarerId)
+            // // .Include(cp => cp.Calls)
+            // // .Include(iss => iss.Issues)
 
-             .ToList();
+
     }
 
     public PatientCareEvent GetPatientCareEventById(int id)
     {
         return db.PatientCareEvents
-                // .Include(dt=> dt.DateTimeOfEvent)
-                .Include(ce => ce.Patient)
-                .Include(ce => ce.Carer)
-                .Include(ct => ct.Calls)
-                .Include(call => call.Call1)
-                .Include(call => call.Call2)
-                .Include(call => call.Call3)
-                .Include(call => call.Call4)
-                .Include(call => call.Call5)
+                .Include(dt=> dt.DateTimeOfEvent)
+                .Include(ce => ce.PatientId)
+                .Include(ce => ce.CarerId)
+                // .Include(ct => ct.Calls)
+                // .Include(call => call.Call1)
+                // .Include(call => call.Call2)
+                // .Include(call => call.Call3)
+                // .Include(call => call.Call4)
+                // .Include(call => call.Call5)
                 .Include(iss => iss.Issues)
                  .FirstOrDefault(pce => pce.Id == id);
     }
@@ -294,7 +294,7 @@ public class PatientServiceDb : IPatientService
             return null; // Careevent  cannot be added as it already exists
         }
 
-         var patientCareevent = new PatientCareEvent
+         var pce = new PatientCareEvent
         {
             DateTimeOfEvent = dt,
             CarePlan = careplan,
@@ -312,10 +312,10 @@ public class PatientServiceDb : IPatientService
         };
     
 
-        //add patient to database
-        db.PatientCareEvents.Add(patientCareevent);
+        //add pce to database
+        db.PatientCareEvents.Add(pce);
         db.SaveChanges();
-        return patientCareevent;
+        return pce;
     }
 
 

@@ -305,25 +305,20 @@ public static class ServiceSeeder
         });
      svc.AddCondition(con3); 
 
-            var pce1 = svc.AddPatientCareEvent(new DateTime(2023, 03, 04),"See Specific tasks for each call.","Nothing to report",5,new TimeOnly (07,00),new TimeOnly (11,00),new TimeOnly (13,00),new TimeOnly (16,00),new TimeOnly (19,00),p.Id, c1.Id );
+            var pce1 = svc.AddPatientCareEvent(new DateTime(2023, 03, 04),"See Specific tasks for each call.","Nothing to report", 5, new TimeOnly (07,00),new TimeOnly (11,00),new TimeOnly (13,00),new TimeOnly (16,00),new TimeOnly (19,00),p.Id, c1.Id );
 
-        //     var pce2 = svc.AddPatientCareEvent(new PatientCareEvent
-        // {
-        //     DateTimeOfEvent = new DateTime(2023, 03, 04),
-        //     CarePlan = "See Specific tasks for each call.",
-        //     Issues = "Nothing to report",
-        //     Calls = 5,
-        //     Call1 = new TimeOnly (07,00),
-        //     Call2 =new TimeOnly (07,00),
-        //     Call3 = new TimeOnly (07,00),
-        //     Call4 = new TimeOnly (07,00),
-        //     Call5 = new TimeOnly (07,00),
-        //     PatientId = p3.Id,
-        //     CarerId = c2.Id
+            var pce2 = svc.AddPatientCareEvent(new DateTime(2023, 10, 07),
+            "See Specific tasks for each call.","Nothing to report",5,
+            new TimeOnly (08,30),
+            new TimeOnly (11,30),
+            new TimeOnly (14,00),
+            new TimeOnly (16,30),
+            new TimeOnly (20,00),
+            p3.Id,
+            c2.Id);
 
-        //     // check for missing attributes
-        // };
-     svc.AddPatientCareEvent(pce1); 
+            
+
 }
 }
 

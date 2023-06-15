@@ -58,7 +58,6 @@ public class Patient
 
     // a set of care events 
     public List<PatientCareEvent> CareEvents { get; set; }
-    public Condition Conditions { get; set; }
     public PatientCondition PatientConditions { get; set; }
     public FamilyMember  FamilyMembers { get; set; }
     public PatientFamily PatientFamilies { get; set; }

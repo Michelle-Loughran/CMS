@@ -31,8 +31,8 @@ public class PatientServiceDb : IPatientService
     public Patient GetPatientById(int id)
     {
         return db.Patients
-                    .Include(p => p.Conditions)
-                    .ThenInclude(p => p.CareEvents)
+                    .Include(p => p.PatientConditions)
+                    .Include(p => p.CareEvents)
                     .ThenInclude(ce => ce.Carer)
                     .FirstOrDefault(p => p.Id == id);          
     }
@@ -73,8 +73,6 @@ public class PatientServiceDb : IPatientService
             SocialWorker = p.SocialWorker,
             CarePlan = p.CarePlan,
             PhotoUrl = p.PhotoUrl,
-            CareEvents = p.CareEvents,
-            Conditions = p.Conditions,
 
             // check for missing attributes
         };
@@ -219,7 +217,7 @@ public class PatientServiceDb : IPatientService
             return null;
         }
 
-        // check for another patient with the NationalInsuranceNo
+        // check for another Carer with the NationalInsuranceNo
         var found = db.Carers
         .FirstOrDefault(c => c.NationalInsuranceNo == updated.NationalInsuranceNo &&
                                            c.Id != updated.Id);
@@ -252,46 +250,36 @@ public class PatientServiceDb : IPatientService
     public IList<PatientCareEvent> GetAllPatientCareEvents(string order = null)
     {
         return db.PatientCareEvents.ToList();
-        
-            // .Include(ce => ce.PatientId)
-            // .Include(ce => ce.CarerId)
-            // // .Include(cp => cp.Calls)
-            // // .Include(iss => iss.Issues)
-
 
     }
 
     public PatientCareEvent GetPatientCareEventById(int id)
     {
         return db.PatientCareEvents
-                .Include(dt=> dt.DateTimeOfEvent)
-                .Include(ce => ce.PatientId)
-                .Include(ce => ce.CarerId)
+                 .Include(e => e.Carer)
+                 .Include(e => e.Patient)
                 // .Include(ct => ct.Calls)
                 // .Include(call => call.Call1)
-                // .Include(call => call.Call2)
-                // .Include(call => call.Call3)
-                // .Include(call => call.Call4)
-                // .Include(call => call.Call5)
-                .Include(iss => iss.Issues)
                  .FirstOrDefault(pce => pce.Id == id);
     }
 
-    public PatientCareEvent AddPatientCareEvent(DateTime dt, string careplan, string issues, int calls, TimeOnly call1,TimeOnly call2,TimeOnly call3,TimeOnly call4,TimeOnly call5 ,int patientId, int carerId)
+    public PatientCareEvent AddPatientCareEvent(DateTime dt, string careplan, string issues, int calls, TimeOnly call1,int patientId, int carerId)
     {
-        var last = db.PatientCareEvents.Where(pce=>pce.PatientId== patientId).OrderByDescending(ce=> ce.DateTimeOfEvent).FirstOrDefault();
+        var last = db.PatientCareEvents.Where(pce=>pce.PatientId== patientId)
+        .OrderByDescending(ce=> ce.DateTimeOfEvent)
+        .FirstOrDefault();
 
-        if (last == null || last.DateTimeOfEvent >= dt)
+        if (last is not null && last.DateTimeOfEvent >= dt)
         {
             return null; // Careevent  cannot be added as it already exists
         }
-         var exists = GetPatientById(patientId);
+         var patient = GetPatientById(patientId);
          var carer = GetCarerById(carerId);
 
            
-        if (exists != null)
+        if (patient is null || carer is null)
         {
-            return null; // Careevent  cannot be added as it already exists
+            return null; // Careevent  cannot be added as as no such patient or carer
         }
 
          var pce = new PatientCareEvent
@@ -301,10 +289,6 @@ public class PatientServiceDb : IPatientService
             Issues = issues,
             Calls = calls,
             Call1 = call1,
-            Call2 = call2,
-            Call3 = call3,
-            Call4 = call4,
-            Call5 = call5 ,
             PatientId = patientId,
             CarerId = carerId
 
@@ -367,11 +351,11 @@ public class PatientServiceDb : IPatientService
     }
     public Condition AddCondition(Condition con)
     {
-        var exists = GetConditionById(con.Id);
+        var exists = db.Conditions.Where(c => c.Name == con.Name).Any();
 
-        if (exists != null)
+        if (exists)
         {
-            return null; // Condition does not exist
+            return null; // Condition already exists
         }
 
         var condition = new Condition
@@ -420,43 +404,35 @@ public class PatientServiceDb : IPatientService
 
     //  ======================Patient Condition Management==================================
 
-    public IList <PatientCondition> GetAllPatientConditions(string order = null)
+    public IList <PatientCondition> GetAllPatientConditions(int patientId)
     {
-                return db.PatientConditions
-                 .Include(ce => ce.Patient)
-                 .Include(ce => ce.Condition)
-                 .ToList();
+ return db.PatientConditions.Where(pc => pc.PatientId == patientId).ToList();
     }
     public PatientCondition GetPatientConditionById(int id)
     {
         return db.PatientConditions
                 .Include(ce => ce.Patient)
-                .Include(ce => ce.Condition)
                 .FirstOrDefault(pc => pc.Id ==id);
 
     }
     public PatientCondition AddPatientCondition(int patientId, int conditionId, string note, DateTime on)
     {
-        var pc = db.PatientConditions.Where(ce => ce.PatientId == patientId)
-         .OrderByDescending(ce => ce.DateTimeConditionAdded).FirstOrDefault();
+        var pc = db.PatientConditions.Where(pc => pc.PatientId == patientId && pc.ConditionId == conditionId);
 
-        if (pc != null && pc.DateTimeConditionAdded >= on)
+        if (pc is not null)
         {
             return null;
         }
 
-        //check patient being passed exists
+        //check patient and condition exists
         var patient = GetPatientById(patientId);
         var condition = GetConditionById(conditionId);
-        if (pc != null)
+
+        if (patient is null || condition is null)
         {
             return null;
         }
 
-        if (patient == null || condition == null)
-        {
-            return null; // Patient or Condition does not exist
-        }
         var patientCondition = new PatientCondition
         {
             PatientId = patientId,
@@ -525,7 +501,7 @@ public class PatientServiceDb : IPatientService
 
         db.FamilyMembers.Add(f);
         db.SaveChanges();
-        return f; // return newly added student
+        return f; // return newly added family member
     }
 
     public bool DeleteFamily(int id)
@@ -542,7 +518,7 @@ public class PatientServiceDb : IPatientService
 
     public FamilyMember UpdateFamily(FamilyMember updated)
     {
-        // verify the student exists
+        // verify the FamilyMember exists
         var family = GetFamilyMemberById(updated.Id);
         if (family == null)
         {
@@ -589,11 +565,6 @@ public class PatientServiceDb : IPatientService
         }
             var patient = GetPatientById(patientId);
             var familymember = GetPatientFamilyMemberById(familymemberId);
-
-        if (pf != null)
-        {
-            return null;
-        }
 
                 if (patient == null || familymember == null)
         {

@@ -12,10 +12,5 @@ public class Condition
     public string Description { get; set; }
 
 
-    public List<Condition> Conditions { get; set;} = new List<Condition>();
-    public List<PatientCondition> PatientCondition { get; set;} = new List<PatientCondition>();
-    public List<PatientCareEvent> CareEvents { get; set; }
-    public List<PatientFamily> PatientFamilies { get; set;}
-
 }
 

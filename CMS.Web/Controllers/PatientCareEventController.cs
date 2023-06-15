@@ -53,7 +53,7 @@ namespace CMS.Web.Controllers
  // POST /carers/create
     //[ValidateAntiForgeryToken]
     [HttpPost]
-    public IActionResult Create([Bind("DateTimeOfEvent, CarePlan, Issues, Calls, Call1, Call2, Call3, Call4, Call5, PatientId, CarerId")] PatientCareEvent pce)
+    public IActionResult Create([Bind("DateTimeOfEvent, CarePlan, Issues, Calls, Call1,  PatientId, CarerId")] PatientCareEvent pce)
     {    // Check patient care event being passed in has Id preset before adding properties
             if (pce == null) 
             {
@@ -65,7 +65,7 @@ namespace CMS.Web.Controllers
         if (ModelState.IsValid)
         {
             // call service Addpatientcareevent method using data in s
-             svc.AddPatientCareEvent(pce.DateTimeOfEvent,pce.CarePlan,pce.Issues,pce.Calls, pce.Call1,pce.Call2,pce.Call3,pce.Call4,pce.Call5, pce.PatientId, pce.CarerId);
+             svc.AddPatientCareEvent(pce.DateTimeOfEvent,pce.CarePlan,pce.Issues,pce.Calls, pce.Call1, pce.PatientId, pce.CarerId);
 
                 Alert("Patient-care-event created successfully!", AlertType.warning);
             

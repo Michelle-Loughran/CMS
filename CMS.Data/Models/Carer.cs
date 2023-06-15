@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 namespace CMS.Data.Models;
 public class Carer
-{
+{ [Required][Column("Patient_Id")]
     public int Id { get; set; }
     public string Title  {get; set; } = string.Empty;
 
@@ -12,7 +12,7 @@ public class Carer
     [Required][StringLength(80, MinimumLength = 1)]
     public string Surname { get; set; } = string.Empty;
     public DateTime DOB { get; set; }
-   public double Age => (DateTime.Now - DOB).Days / 365.242199;
+   public int Age => (DateTime.Now - DOB).Days / 365;
 
      [Required][StringLength(80, MinimumLength = 1)]
     public string NationalInsuranceNo { get; set; } = string.Empty;

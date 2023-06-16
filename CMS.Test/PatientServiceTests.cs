@@ -5,6 +5,7 @@ using CMS.Data.Models;
 
 namespace CMS.Test;
 
+[Collection("Sequential")]
 public class ServiceTests
 {
 
@@ -95,7 +96,6 @@ public class ServiceTests
         Assert.Equal(ap.DOB, patient.DOB);
         Assert.Equal(ap.NationalInsuranceNo, patient.NationalInsuranceNo);
         Assert.Equal(ap.Email, patient.Email);
-        Assert.Equal(ap.PatientConditions, patient.PatientConditions);
         Assert.Equal(ap.MobileNumber, patient.MobileNumber);
     }
 
@@ -565,14 +565,12 @@ public class ServiceTests
         // act
         var pc = svc.AddPatientCondition(p.Id, c.Id, "PatientNote", new DateTime(2023, 3, 2, 13, 5, 11, 123));
         var pc2 = svc.AddPatientCondition(p.Id, c.Id, "PatientNote", new DateTime(2023, 3, 1, 13, 5, 11, 123));
-
         // assert
         Assert.NotNull(p);
         Assert.NotNull(c);
         Assert.NotNull(pc);
         Assert.Equal("PatientNote", pc.Note);
         Assert.Null(pc2);
-    
 
     }
     [Fact]

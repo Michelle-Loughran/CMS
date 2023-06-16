@@ -1,4 +1,5 @@
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CMS.Data.Models;
 
@@ -13,7 +14,7 @@ public class PatientCareEvent
 
     // Notes documenting completion of Careplan
     public string Issues { get; set; }
-
+    [Range(0, 10, ErrorMessage = "The number of calls shoould be between 1 and 10")]
     public int Calls { get; set; }
 
     public TimeOnly Call1 { get; set; }

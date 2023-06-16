@@ -47,9 +47,9 @@ public class Patient
 
     public string Email { get; set; } = string.Empty;
 
-   [Required][StringLength(80, MinimumLength = 3)]
+   [Required][StringLength(80, MinimumLength = 2)]
     public string GP { get; set; } = string.Empty;
-    [Required][StringLength(80, MinimumLength = 3)]
+    [Required][StringLength(80, MinimumLength = 2)]
     public string SocialWorker { get; set; } = string.Empty;
 
     public string CarePlan { get; set; }

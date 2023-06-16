@@ -64,7 +64,7 @@ namespace CMS.Web.Controllers
         // complete POST action to add patient care event to database
         if (ModelState.IsValid)
         {
-            // call service Addpatientcareevent method using data in s
+            // call service Addpatientcareevent method using data in pce
              svc.AddPatientCareEvent(pce.DateTimeOfEvent,pce.CarePlan,pce.Issues,pce.Calls, pce.Call1, pce.PatientId, pce.CarerId);
 
                 Alert("Patient-care-event created successfully!", AlertType.warning);

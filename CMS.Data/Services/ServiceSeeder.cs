@@ -11,7 +11,8 @@ public static class ServiceSeeder
         svc.Initialise();
 
         // add patient data
-        var p = svc.AddPatient( new Patient {
+        var p = svc.AddPatient( new Patient 
+        {
             Title = "Mr",
             Firstname = "Joe",
             Surname = "Bloggs",
@@ -33,7 +34,8 @@ public static class ServiceSeeder
         });  
         svc.AddPatient(p); 
 
-        var p2 = svc.AddPatient( new Patient {
+        var p2 = svc.AddPatient( new Patient 
+        {
             Title = "Mrs",
             Firstname = "Mary",
             Surname = "Bloggs",
@@ -54,7 +56,8 @@ public static class ServiceSeeder
         });
          svc.AddPatient(p2);
 
-            var p3 = svc.AddPatient( new Patient {
+            var p3 = svc.AddPatient( new Patient 
+            {
             Title = "Mr",
             Firstname = "Tom",
             Surname = "Bloggs",
@@ -75,7 +78,8 @@ public static class ServiceSeeder
         }); 
          svc.AddPatient(p3);  
  
-            var p4 = svc.AddPatient( new Patient {
+            var p4 = svc.AddPatient( new Patient 
+            {
             Title = "Mr",
             Firstname = "Donald",
             Surname = "Bloggs",
@@ -96,7 +100,8 @@ public static class ServiceSeeder
         }); 
          svc.AddPatient(p4);
 
-          var p5 = svc.AddPatient( new Patient {
+          var p5 = svc.AddPatient( new Patient 
+          {
             Title = "Mr",
             Firstname = "Mickey",
             Surname = "Bloggs",
@@ -117,7 +122,8 @@ public static class ServiceSeeder
         }); 
          svc.AddPatient(p5);
 
-          var p6 = svc.AddPatient( new Patient {
+          var p6 = svc.AddPatient( new Patient 
+          {
             Title = "Miss",
             Firstname = "Nancy",
             Surname = "Bloggs",
@@ -139,7 +145,8 @@ public static class ServiceSeeder
          svc.AddPatient(p6);
 
 
-           var p7 = svc.AddPatient( new Patient {
+           var p7 = svc.AddPatient( new Patient 
+           {
             Title = "Mr",
             Firstname = "Brian",
             Surname = "Bloggs",
@@ -160,7 +167,8 @@ public static class ServiceSeeder
         }); 
          svc.AddPatient(p7);
 
-           var p8 = svc.AddPatient( new Patient {
+           var p8 = svc.AddPatient( new Patient 
+           {
             Title = "Mr",
             Firstname = "Niall",
             Surname = "Bloggs",
@@ -181,7 +189,8 @@ public static class ServiceSeeder
         }); 
          svc.AddPatient(p8);
 
-           var p9 = svc.AddPatient( new Patient {
+           var p9 = svc.AddPatient( new Patient 
+           {
             Title = "Mr",
             Firstname = "Michael",
             Surname = "Bloggs",
@@ -202,7 +211,8 @@ public static class ServiceSeeder
         }); 
          svc.AddPatient(p9);
 
-           var p10 = svc.AddPatient( new Patient {
+           var p10 = svc.AddPatient( new Patient 
+           {
             Title = "Mr",
             Firstname = "John",
             Surname = "Bloggs",
@@ -223,7 +233,8 @@ public static class ServiceSeeder
         }); 
          svc.AddPatient(p10);
 
-            var c1 = svc.AddCarer( new Carer {
+            var c1 = svc.AddCarer( new Carer 
+            {
             Title = "Mr",
             Firstname = "Michael",
             Surname = "Hegarty",
@@ -243,13 +254,14 @@ public static class ServiceSeeder
     }); 
     svc.AddCarer(c1);  
 
-            var c2 = svc.AddCarer( new Carer {
+            var c2 = svc.AddCarer( new Carer 
+            {
             Title = "Mrs",
             Firstname = "Mary",
             Surname = "Hegarty",
-            DOB = new DateTime (1977,06,28), 
+            DOB = new DateTime(1977,06,28), 
             NationalInsuranceNo = "NR561234D",
-            DBSCheck= true,
+            DBSCheck = true,
             EmailAddress = "Mary@mail.com",
             Street = "34 Warren Hill",
             Town = "Newry",
@@ -258,11 +270,12 @@ public static class ServiceSeeder
             MobileNumber = "01234567891",
             HomeNumber = "02830303030",
             Qualifications = "8 GCSE's, Maths, A, English B, Social Care A, Accounts C,Economics C Art B, RE C, PSE C",
-            PhotoUrl ="/images/Carer2.jpg"
+            PhotoUrl = "/images/Carer2.jpg"
         // add other dummy data here     
     }); 
     svc.AddCarer(c2); 
-            var c3 = svc.AddCarer( new Carer {
+            var c3 = svc.AddCarer( new Carer 
+            {
             Title = "Mrs",
             Firstname = "Mary",
             Surname = "Hasselhoff",
@@ -281,7 +294,8 @@ public static class ServiceSeeder
         // add other dummy data here     
     }); 
     svc.AddCarer(c3); 
-            var con1 = svc.AddCondition( new Condition {
+            var con1 = svc.AddCondition( new Condition 
+            {
                  
             Name = "Diabetes",
             Description = "Diabetes is a condition that causes a person's blood sugar level to become too high. There are 2 main types of diabetes: type 1 diabetes - a lifelong condition where the body's immune system attacks and destroys the cells that produce insulin. type 2 diabetes - where the body does not produce enough insulin, or the body's cells do not react to insulin properly Type 2 diabetes is far more common than type 1. In the UK, over 90% of all adults with diabetes have type 2.High blood sugar that develops during pregnancy is known as gestational diabetes. It usually goes away after giving birth."
@@ -289,7 +303,8 @@ public static class ServiceSeeder
         //https://www.nhs.uk/conditions/diabetes/
   
     svc.AddCondition(con1); 
-            var con2 = svc.AddCondition( new Condition {
+            var con2 = svc.AddCondition( new Condition 
+            {
                  
             Name = "Arthritis",
             Description = " Arthritis is a common condition that causes pain and inflammation in a joint or joints. Arthritis affects people of all ages, including children. Osteoarthritis and rheumatoid arthritis are the 2 most common types of arthritis."
@@ -298,7 +313,8 @@ public static class ServiceSeeder
     svc.AddCondition(con2); 
 
    
-            var con3 = svc.AddCondition( new Condition {
+            var con3 = svc.AddCondition( new Condition 
+            {
                  
             Name = "Heart Disease",
             Description = " Coronary heart disease is the term that describes what happens when your heart's blood supply is blocked or interrupted by a build-up of fatty substances in the coronary arteries.."
@@ -308,8 +324,7 @@ public static class ServiceSeeder
             var pce1 = svc.AddPatientCareEvent(new DateTime(2023, 03, 04),"See Specific tasks for each call.","Nothing to report", 5, new TimeOnly (07,00),p.Id, c1.Id );
 
             var pce2 = svc.AddPatientCareEvent(new DateTime(2023, 10, 07),
-            "See Specific tasks for each call.","Nothing to report",5,
-            new TimeOnly (08,30),p3.Id,c2.Id);
+            "See Specific tasks for each call.","Nothing to report",5,new TimeOnly (08,30),p3.Id,c2.Id);
 
 }
 }

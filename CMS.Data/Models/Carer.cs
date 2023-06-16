@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace CMS.Data.Models;
 public class Carer
-{ [Required][Column("Patient_Id")]
+{ [Required][Column("Carer_Id")]
     public int Id { get; set; }
     public string Title  {get; set; } = string.Empty;
 
@@ -44,7 +44,7 @@ public class Carer
     // public int UserId { get; set; }
     // public User User { get; set; } 
 
-    // navigation property? Do I need this? I'm not sure
+    // navigation property
     public int PatientId { get; set; }
 
     // a carer performs many patient care events on Patient

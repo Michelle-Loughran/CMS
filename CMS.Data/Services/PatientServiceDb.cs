@@ -74,7 +74,7 @@ public class PatientServiceDb : IPatientService
             CarePlan = p.CarePlan,
             PhotoUrl = p.PhotoUrl,
 
-            // check for missing attributes
+            // check for missing attributes - all here
         };
 
         //add patient to database

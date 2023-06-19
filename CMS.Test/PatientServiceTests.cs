@@ -590,7 +590,7 @@ public class ServiceTests
 
     }
 
-    [Fact]
+   [Fact]
     public void GetPatientCondition_WhenExists_ShouldReturnPatientConditions()
     {
         // arrange
@@ -612,7 +612,7 @@ public class ServiceTests
     }
 
 
-    [Fact]
+  [Fact]
     public void TestDeletePatientCondition__ShouldReturntrue()
     {
         //Arrange
@@ -628,7 +628,7 @@ public class ServiceTests
         Assert.True(deleted);
     }
 
-    [Fact]
+     [Fact]
     public void TestUpdatePatientCondition_WhenAdded_ShouldReturnTrue()
     {
         //Arrange

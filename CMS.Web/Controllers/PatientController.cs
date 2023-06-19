@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 using CMS.Data.Services;
 using CMS.Data.Models;
-using CMS.Web.Models;
 
 namespace CMS.Web.Controllers;
 
@@ -57,9 +56,8 @@ public class PatientController : BaseController
     // POST /patient/create
     //[ValidateAntiForgeryToken]
     [HttpPost]
-    public IActionResult Create(Patient p)
+    public IActionResult Create(Data.Models.Patient p)
     {   
-      
         // complete POST action to add patient
         if (ModelState.IsValid)
         {

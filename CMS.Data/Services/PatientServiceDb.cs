@@ -417,17 +417,17 @@ public class PatientServiceDb : IPatientService
     }
     public PatientCondition AddPatientCondition(int patientId, int conditionId, string note, DateTime on)
     {
-        var pc = db.PatientConditions.Where(pc => pc.PatientId == patientId && pc.ConditionId == conditionId);
+        var pc = db.PatientConditions.FirstOrDefault( pc => pc.PatientId == patientId && pc.ConditionId == conditionId);
 
+        //check if patient condition already exists
         if (pc is not null)
         {
             return null;
         }
 
-        //check patient and condition exists
+        // check patient and condition exist
         var patient = GetPatientById(patientId);
         var condition = GetConditionById(conditionId);
-
         if (patient is null || condition is null)
         {
             return null;

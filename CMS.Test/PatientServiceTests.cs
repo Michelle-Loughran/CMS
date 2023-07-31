@@ -989,6 +989,78 @@ public class PatientServiceTests
         Assert.Equal(fm.Id, fm.Id);
       
     }
+     // ======== Appointment tests ===========
+    [Fact]
+    public void TestAddAppointment_WhenValid_ShouldBeAdded()
+    {
+        // arrange
+        var p = svc.AddPatient(Factory.MakePatient());
+        var c = svc.AddCarer(Factory.MakeCarer());
+        
+        // act
+        var a = svc.AddAppointment(new Appointment {
+            DateTime = new DateTime(10,10,2023,8,0,0),
+            PatientId = p.Id,
+            CarerId =  c.Id
+        });
+
+        // assert 
+        Assert.NotNull(a);
+    }
+     [Fact]
+    public void TestAddAppointment_WhenDuplicate_ShouldNotBeAdded()
+    {
+        // arrange
+        var p = svc.AddPatient(Factory.MakePatient());
+        var c = svc.AddCarer(Factory.MakeCarer());
+        
+        var a = svc.AddAppointment(new Appointment {
+            DateTime = new DateTime(2023,1,1,8,0,0),
+            PatientId = p.Id,
+            CarerId =  c.Id
+        });
+
+        // act
+        var d = svc.AddAppointment(new Appointment {
+            DateTime = new DateTime(2023,1,1,8,0,0),
+            PatientId = p.Id,
+            CarerId =  c.Id
+        });
+
+        // assert 
+        Assert.NotNull(a);
+        Assert.Null(d);
+    }
+[Fact]
+    public void TestUpdateAppointment_WhenDuplicate_ShouldNotBeUpdated()
+    {
+        // arrange
+        var p1 = svc.AddPatient(Factory.MakePatient());
+        
+        var c1 = svc.AddCarer(Factory.MakeCarer());
+        
+        var a1 = svc.AddAppointment(new Appointment {
+            DateTime = new DateTime(2023,1,1,8,0,0),
+            PatientId = p1.Id,
+            CarerId =  c1.Id
+        });
+        var a2 = svc.AddAppointment(new Appointment {
+            DateTime = new DateTime(2023,1,1,10,0,0),
+            PatientId = p1.Id,
+            CarerId =  c1.Id
+        });
+
+        // act - duplicate time
+        a2.DateTime = new DateTime(2023,1,1,8,0,0);
+       
+        var u = svc.UpdateAppointment(a2);
+        
+        // assert
+        Assert.NotNull(a1);
+        Assert.NotNull(a2);
+        Assert.Null(u);
+
+    }
    
 } 
 
@@ -1017,6 +1089,30 @@ static class Factory
             CarePlan = "Get lunch, clear dishes to dishwasher"
             // ....
         };
+        
+    }
+
+      public static Patient MakePatient2()
+    {
+        return new Patient
+        {
+            Title = "Mrs",
+            Firstname = "Francis",
+            Surname = "Deery",
+            NationalInsuranceNo = "DY1058765432B",
+            DOB = new DateTime(1971, 5, 04),
+            Email = "francis@mail.com",
+            Street = "Main St",
+            Town = "Belfast",
+            County = "Antrin",
+            Postcode = " BT3 1ER",
+            MobileNumber = "0749788702",
+            HomeNumber = "02890123456",
+            GP = " Dr F Kelly",
+            SocialWorker = "John Burke",
+            CarePlan = "Get lunch, clear dishes to dishwasher"
+            // ....
+        };
     }
 
     public static User MakeCarer()
@@ -1031,6 +1127,29 @@ static class Factory
             NationalInsuranceNo = "CD123456",
             DOB = new DateTime(1968, 03, 04),
             Email = "carer@mail.com",
+            Password = "password",
+            Street = " 28 Warren Hill ",
+            Town = "Newry",
+            County = " Down",
+            Postcode = " BT34 2PH",
+            MobileNumber = "01234567898",
+            HomeNumber = "028302515",
+            Qualifications = "BTEC Level III Social Healthcare"
+            // ....
+        };
+    }
+     public static User MakeCarer2()
+    {
+        
+        return new User
+        {
+            Role = Role.carer,
+            Title = "Mrs",
+            Firstname = "Minnie",
+            Surname = "Mouse",
+            NationalInsuranceNo = "CD146456",
+            DOB = new DateTime(1988, 03, 04),
+            Email = "minnie@mail.com",
             Password = "password",
             Street = " 28 Warren Hill ",
             Town = "Newry",

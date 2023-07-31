@@ -13,6 +13,7 @@ namespace CMS.Data.Repositories
     {
          // authentication store
         public DbSet<User> Users { get; set; }
+        public DbSet<User> Carers { get; set; }
         public DbSet<ForgotPassword> ForgotPasswords { get; set; }
          public DbSet<Patient> Patients { get; set; }
         public DbSet<Condition> Conditions { get; set; }

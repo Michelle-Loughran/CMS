@@ -45,6 +45,8 @@ public class User
     public string Password { get; set; }       
     public Role Role { get; set; }
     public int UserId { get; set; }
+    public int CarerId { get; set; }
+    public User Carers { get; set; }
 
     public string Name => Firstname + " " + Surname;
     public int Age => (DateTime.Now - DOB).Days / 365;

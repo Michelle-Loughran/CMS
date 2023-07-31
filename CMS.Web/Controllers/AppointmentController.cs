@@ -10,7 +10,7 @@ using System;
 
 
 namespace CMS.Web.Controllers
-{    [Authorize(Roles="carer, manager")]
+{    [Authorize(Roles="carer")]
     public class AppointmentController : BaseController
     {
         private readonly IPatientService svc;
@@ -23,7 +23,7 @@ namespace CMS.Web.Controllers
         public IActionResult Index()
         {
            IList<Appointment> appointments;
-        if (User.HasOneOfRoles("carer")) 
+        if (User.HasOneOfRoles("carer, manager")) 
         {
             appointments = svc.GetUserAppointments(User.GetSignedInUserId());
         }
@@ -57,10 +57,15 @@ namespace CMS.Web.Controllers
                 return RedirectToAction(nameof(Index), "Appointment");
             }
 
-            int userId =  User.GetSignedInUserId();
-
-            var carer = svc.GetCarerById(id);
-            if (carer is null)
+            // int userId =  User.GetSignedInUserId();
+            int carerId = svc.Get(id);
+            if (carerId is null)
+            {
+                Alert("Carer does not exist", AlertType.warning);
+                return RedirectToAction(nameof(Index), "Appointment");
+            }
+            // var carer = svc.GetCarerById(id);
+            if (carerId is null)
             {
                 Alert("Carer does not exist", AlertType.warning);
                 return RedirectToAction(nameof(PatientDetails), "Appointment", new { Id = id });
@@ -105,6 +110,33 @@ namespace CMS.Web.Controllers
 
             // redisplay the form for editing as there are validation errors
             return View(pce);
+        }
+         // GET /PatientCareEvent/Delete/{id}
+        public IActionResult Delete(int id)
+        {
+            var pce = svc.GetPatientCareEventById(id);
+
+            // check if patientcare-events is null and alert/redirect 
+            if (pce is null)
+            {
+                Alert("Patient Care Event Does not Exist", AlertType.warning);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(pce);
+        }
+         // POST /PatientCareEvent/Delete/{id}
+        [HttpPost]
+        public IActionResult DeleteConfirm(int id)
+        {
+            var ce = svc.GetPatientCareEventById(id);
+            if (ce is null) 
+            {
+                Alert("Patient Care Event Could not be deleted", AlertType.warning); 
+            }
+           svc.DeletePatientCareEvent(id);           
+
+           return RedirectToAction("PatientDetails", "Appointment", new { id = ce.PatientId });
         }
 }
 }

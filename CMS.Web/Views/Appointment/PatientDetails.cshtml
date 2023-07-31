@@ -3,8 +3,17 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-        <li class="breadcrumb-item"><a asp-controller="Appointment" asp-action="Index">Appointments</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Details</li>
+        <li class="breadcrumb-item"><a asp-controller="Appointment"
+                asp-action="Index">Appointments</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Appointment"
+                asp-action="PatientDetails">Patient Details</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Appointment"
+                asp-action="CreateCareEvent">Add Care Event</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Appointment"
+                asp-action="CareEventDetails">CareEventDetails</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Appointment"
+                asp-action="EditCareEvent">Edit Care Event</a></li>
+
     </ol>
 </nav>
 
@@ -63,22 +72,22 @@
 
     <!-- action options -->
     <div class="mt-4 mb-4">
-        <a asp-controller="Patient" asp-action="Index" class="btn btn-primary">
+        <a asp-controller="Appointment" asp-action="Index" class="btn btn-primary">
             <i class="bi bi-list"></i>
-            Patient List
+            Appointment List
         </a>
 
-        <a asp-roles="manager" asp-controller="Patient" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+        <a asp-roles="manager" asp-controller="Appointment" asp-action="EditCareEvent" asp-route-id="@Model.Id" class="btn btn-primary">
             <i class="bi bi-pen"></i>
-            Edit Patient
+            Edit Care Event
         </a>
 
-        <a asp-roles="manager" asp-controller="Patient" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary">
+        <a asp-roles="manager" asp-controller="Appointment" asp-action="DeleteCareEvent" asp-route-id="@Model.Id" class="btn btn-primary">
             <i class="bi bi-trash"></i>
-            Delete
+            Delete Care Event
         </a>
 
-        <a asp-roles="carer" asp-controller="PatientCareEvent" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-secondary">
+        <a asp-roles="carer, manager" asp-controller="Appointment" asp-action="CreateCareEvent" asp-route-id="@Model.Id" class="btn btn-secondary">
             <i class="bi-bag-plus-fill"></i>
             Add Care Event
         </a>

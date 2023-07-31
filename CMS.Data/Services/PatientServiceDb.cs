@@ -76,10 +76,10 @@ public class PatientServiceDb : IPatientService
     }
     public IList<User> GetUsersByRole(Role role)
     {
-          return db.Users
-                     .Where(u => u.Role == role)
-                     .ToList();     
-        }
+        return db.Users
+                   .Where(u => u.Role == role)
+                   .ToList();
+    }
     public User Register(User u)
     {
         // check user doesn't already exist
@@ -103,9 +103,9 @@ public class PatientServiceDb : IPatientService
         db.Users.Add(user);
         db.SaveChanges();
 
-            // return new user
-            return user;
-        }
+        // return new user
+        return user;
+    }
 
     public User AddUser(User user)
     {
@@ -143,23 +143,23 @@ public class PatientServiceDb : IPatientService
         }
 
         // update the information for the carer and save         
-                user.Title = updated.Title; 
-                user.Firstname = updated.Firstname;
-                user.Surname = updated.Surname;
-                user.DOB = updated.DOB;
-                user.Email = updated.Email;
-                user.Password = Hasher.CalculateHash(updated.Password);
-                user.Street = updated.Street;
-                user.Town = updated.Town;
-                user.County = updated.County;
-                user.Postcode = updated.Postcode;
-                user.MobileNumber = updated.MobileNumber;
-                user.HomeNumber = updated.HomeNumber;
-                user.NationalInsuranceNo = updated.NationalInsuranceNo;
-                user.DBSCheck = updated.DBSCheck;
-                user.Qualifications = updated.Qualifications;
-                user.PhotoUrl = updated.PhotoUrl;
-                user.Role = updated.Role;
+        user.Title = updated.Title;
+        user.Firstname = updated.Firstname;
+        user.Surname = updated.Surname;
+        user.DOB = updated.DOB;
+        user.Email = updated.Email;
+        user.Password = Hasher.CalculateHash(updated.Password);
+        user.Street = updated.Street;
+        user.Town = updated.Town;
+        user.County = updated.County;
+        user.Postcode = updated.Postcode;
+        user.MobileNumber = updated.MobileNumber;
+        user.HomeNumber = updated.HomeNumber;
+        user.NationalInsuranceNo = updated.NationalInsuranceNo;
+        user.DBSCheck = updated.DBSCheck;
+        user.Qualifications = updated.Qualifications;
+        user.PhotoUrl = updated.PhotoUrl;
+        user.Role = updated.Role;
 
         db.SaveChanges();
         return user;
@@ -219,7 +219,7 @@ public class PatientServiceDb : IPatientService
     {
         return db.Patients.ToList();
     }
-    public IList<Patient> GetPatientsForMember(int memberId) 
+    public IList<Patient> GetPatientsForMember(int memberId)
     {
         return db.FamilyMembers.Where(fm => fm.MemberId == memberId)
                  .Select(fm => fm.Patient)
@@ -354,7 +354,12 @@ public class PatientServiceDb : IPatientService
                  .FirstOrDefault(u => u.Id == id);
     }
 
-
+ public User GetCarerByUserId(int id)
+    {
+        return db.Users
+                 .Where(u => u.Role == Role.carer)
+                 .FirstOrDefault(u => u.Id == id);
+    }
     // retrieve specific Carer with their email
     public User GetCarerByEmail(string email)
     {
@@ -375,7 +380,7 @@ public class PatientServiceDb : IPatientService
 
         // create the carer and save
         var carer = new User
-        {  
+        {
             Title = c.Title,
             Firstname = c.Firstname,
             Surname = c.Surname,
@@ -433,7 +438,7 @@ public class PatientServiceDb : IPatientService
         }
 
         // update the information for the carer and save
-        carer.Title = updated.Title;         
+        carer.Title = updated.Title;
         carer.Firstname = updated.Firstname;
         carer.Surname = updated.Surname;
         carer.NationalInsuranceNo = updated.NationalInsuranceNo;
@@ -454,7 +459,7 @@ public class PatientServiceDb : IPatientService
     }
 
     // ------------------ Member Management ----------------
-      // retrieve list of Carers with their main details
+    // retrieve list of Carers with their main details
     public IList<User> GetAllMembers(string order = null)
     {
         return db.Users.Where(u => u.Role == Role.family)
@@ -542,14 +547,14 @@ public class PatientServiceDb : IPatientService
         // update the information for the member and save         
         member.Firstname = updated.Firstname;
         member.Surname = updated.Surname;
-        member.DOB = updated.DOB;       
+        member.DOB = updated.DOB;
         member.Email = updated.Email;
         member.Street = updated.Street;
         member.Town = updated.Town;
         member.County = updated.County;
         member.Postcode = updated.Postcode;
         member.MobileNumber = updated.MobileNumber;
-        member.HomeNumber = updated.HomeNumber;   
+        member.HomeNumber = updated.HomeNumber;
         member.Password = Hasher.IsHashed(updated.Password) ? updated.Password : Hasher.CalculateHash(updated.Password);
 
         db.SaveChanges();
@@ -831,7 +836,7 @@ public class PatientServiceDb : IPatientService
 
     public FamilyMember UpdatePatientFamilyMember(FamilyMember updated)
     {
-        var fm =  GetPatientFamilyMemberById(updated.PatientId, updated.MemberId);
+        var fm = GetPatientFamilyMemberById(updated.PatientId, updated.MemberId);
         if (fm is null)
         {
             return null;
@@ -859,25 +864,28 @@ public class PatientServiceDb : IPatientService
 
     public IList<Appointment> GetAllAppointments(string order = null)
     {
-        return db.Appointments.ToList();
+        return db.Appointments
+                .Include(a => a.Carer)
+                .Include(a => a.Patient)
+                .ToList();
     }
     public Appointment GetAppointmentByDateTime(DateTime dateTime)
     {
         return db.Appointments.FirstOrDefault(a => a.DateTime == dateTime);
     }
-      public Appointment GetAppointmentById(int id)
+    public Appointment GetAppointmentById(int id)
     {
         return db.Appointments.FirstOrDefault(a => a.Id == id);
     }
 
-public IList<Appointment> GetUserAppointments(int userId)
-{
-    return db.Appointments
-        .Where(a => a.UserId == userId)
-        .Include(a => a.User) 
-        .Include(a => a.Patient)
-        .ToList();
-}
+    public IList<Appointment> GetUserAppointments(int carerId)
+    {
+        return db.Appointments
+            .Where(a => a.CarerId == carerId)
+            .Include(a => a.Carer)
+            .Include(a => a.Patient)
+            .ToList();
+    }
     public IList<Appointment> SearchAppointments(string query)
     {
         return new List<Appointment>();
@@ -894,7 +902,7 @@ public IList<Appointment> GetUserAppointments(int userId)
         var appointment = new Appointment
         {
             DateTime = md.DateTime,
-            UserId = md.UserId,
+            UserId = md.CarerId,
             PatientId = md.PatientId,
         };
         db.Appointments.Add(appointment);
@@ -914,17 +922,19 @@ public IList<Appointment> GetUserAppointments(int userId)
     }
     public Appointment UpdateAppointment(Appointment updated)
     {
-        // verify the Day exists
-        var a = GetAppointmentById(updated.Id);
-        if (a == null)
+         // check for duplicate appointment - same patient and time
+        var duplicate = db.Appointments.FirstOrDefault(
+            a => a.PatientId == updated.PatientId &&
+                 a.DateTime == updated.DateTime &&
+                 a.Id != updated.Id            
+        );
+        if (duplicate != null)
         {
             return null;
         }
-        // check for a double appointment with the same date
-        var found = db.Appointments
-                      .FirstOrDefault(p => p.DateTime == updated.DateTime &&
-                                           p.Id != updated.Id);
-        if (found != null)
+        // find the appointment
+        var a = GetAppointmentById(updated.Id);
+        if (a == null)
         {
             return null;
         }
@@ -932,7 +942,7 @@ public IList<Appointment> GetUserAppointments(int userId)
         a.Id = updated.Id;
         a.DateTime = updated.DateTime;
         a.PatientId = updated.PatientId;
-        a.UserId = updated.UserId;
+        a.UserId = updated.CarerId;
 
         db.SaveChanges();
         return a;

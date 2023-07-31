@@ -14,7 +14,6 @@ namespace CMS.Data.Services
             // seeder destroys and recreates the database - NOT to be called in production!!!
             svc.Initialise();
 
-            // add admin users
              // add admin users
             svc.AddUser(new User {
                 Firstname = "The",
@@ -51,7 +50,8 @@ namespace CMS.Data.Services
                 MobileNumber = "01234567891",
                 HomeNumber = "02830303030",
                 Qualifications = "8 GCSE's, Maths, A, English B, Social Care A, Accounts C,Economics C Art B, RE C, PSE C",
-                PhotoUrl = "/images/Carer1.jpg"
+                PhotoUrl = "/images/Carer1.jpg",
+                Role = Role.carer
                  
             });
 
@@ -94,13 +94,14 @@ namespace CMS.Data.Services
                 MobileNumber = "01234567891",
                 HomeNumber = "02830303030",
                 Qualifications = "8 GCSE's, Maths, A, English B, Social Care A, Accounts C,Economics C Art B, RE C, PSE C",
-                PhotoUrl = "/images/Carer2.jpg"
+                PhotoUrl = "/images/Carer2.jpg",
+                Role= Role.manager
             });
 
 
 
             // add patient data
-            var p = svc.AddPatient(new Patient
+            var p1 = svc.AddPatient(new Patient
             {
                 Title = "Mr",
                 Firstname = "Joe",
@@ -341,8 +342,8 @@ namespace CMS.Data.Services
                 Description = " Coronary heart disease is the term that describes what happens when your heart's blood supply is blocked or interrupted by a build-up of fatty substances in the coronary arteries.."
             });
 
-            svc.AddPatientCondition(p.Id, con1.Id, "Severe", DateTime.Now);
-            svc.AddPatientCondition(p.Id, con2.Id, "Moderate", DateTime.Now);
+            svc.AddPatientCondition(p1.Id, con1.Id, "Severe", DateTime.Now);
+            svc.AddPatientCondition(p1.Id, con2.Id, "Moderate", DateTime.Now);
 
 
             var pce1 = svc.AddPatientCareEvent(new PatientCareEvent
@@ -350,7 +351,7 @@ namespace CMS.Data.Services
                 DateTimeOfEvent = new DateTime(2023, 03, 04),
                 CarePlan = "See Specific tasks for each call.",
                 Issues = "Nothing to report",
-                PatientId = p.Id,
+                PatientId = p1.Id,
                 CarerId = c1.UserId
             });
 
@@ -397,191 +398,193 @@ namespace CMS.Data.Services
                 HomeNumber = "02830303030",
                            
             });
-            var ap1 = svc.AddAppointment(new Appointment
-                {
- 
-                DateTime = new DateTime(2023, 05, 28),
-                UserId = c2.Id,    
-                PatientId = p2.Id,
+
+                // ============== APPOINTMENTS =================
+
+            // Appointments patient 1 carer 1
+             var ap1 = svc.AddAppointment(new Appointment
+            {
+                DateTime = new DateTime(2023, 05, 28),               
+                PatientId = p1.Id,
+                CarerId = c1.Id,    
             });
-            // var ap2 = svc.AddAppointment(new Appointment
-            // {
+            var ap2 = svc.AddAppointment(new Appointment
+            {
 
-            //     DateTime = new DateTime(2023, 05, 28),
+                DateTime = new DateTime(2023, 05, 28),
+                PatientId = p3.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            //     PatientId = p3.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
-
-            // });
-            //   var ap3 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap3 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p4.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p4.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap4 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap4 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p5.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p5.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap5 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap5 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p6.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p6.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap6 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap6 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p2.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p2.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap7 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap7 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p2.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p2.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap8 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap8 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p3.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p3.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap9 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap9 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p4.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p4.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap10 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap10 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p5.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p5.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap11 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap11 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p6.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p6.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap12 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap12 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p7.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p7.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap13 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap13 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p2.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p2.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap14= svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap14= svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p2.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p2.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap15 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap15 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p3.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p3.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap16 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap16 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p4.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p4.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap17 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap17 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p5.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p5.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
-            //   var ap18 = svc.AddAppointment(new Appointment
-            // {
+            });
+              var ap18 = svc.AddAppointment(new Appointment
+            {
                 
-            //     DateTime = new DateTime(2023, 05, 28),
-            //     // Day = DayOfWeek.Sunday,
-            //     PatientId = p6.Id,
-            //     // Patient = Patient,
-            //     UserId = c2.Id,
+                DateTime = new DateTime(2023, 05, 28),
+                // Day = DayOfWeek.Sunday,
+                PatientId = p6.Id,
+                // Patient = Patient,
+                CarerId = c2.Id,
 
-            // });
+            });
 
     
 
             Console.WriteLine("******" + m2.Name);
 
             // add member 1 to patient 1 family
-            svc.AddPatientFamilyMember(p.Id, m1.Id, true);
-            svc.AddPatientFamilyMember(p.Id, m2.Id, false);
+            svc.AddPatientFamilyMember(p1.Id, m1.Id, true);
+            svc.AddPatientFamilyMember(p1.Id, m2.Id, false);
 
         }
     }

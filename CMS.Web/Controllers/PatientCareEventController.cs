@@ -56,8 +56,7 @@ namespace CMS.Web.Controllers
                 return RedirectToAction(nameof(Index), "Patient");
             }
 
-            int userId =  User.GetSignedInUserId();
-
+            // int userId =  User.GetSignedInUserId();
             var carer = svc.GetCarerById(id);
             if (carer is null)
             {
